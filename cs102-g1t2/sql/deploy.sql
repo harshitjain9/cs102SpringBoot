@@ -28,12 +28,18 @@ CREATE TABLE IF NOT EXISTS `vessel` (
   UNIQUE (`abbrVslM`,`outVoyN`)
 );
 
-DROP TABLE IF EXISTS `alert`;
+DROP TABLE IF EXISTS `alert_table`;
 CREATE TABLE IF NOT EXISTS `alert` (
   `abbr_vslm` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `in_voyn` varchar(255) NOT NULL,
   PRIMARY KEY (`abbr_vslm`,`email`,`in_voyn`)
+);
+
+DROP TABLE IF EXISTS `registration_table`;
+CREATE TABLE IF NOT EXISTS `registration` (
+  `emailSuffix` varchar(255) NOT NULL,
+  PRIMARY KEY (`emailSuffix`)
 );
 
 DROP TABLE IF EXISTS `predicted_btr`;
