@@ -4,8 +4,8 @@ package g1t2.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import g1t2.entities.*;
-import g1t2.repositories.*;
+import g1t2.entities.Registration;
+import g1t2.repositories.RegistrationRepository;
 
 @Service
 public class RegistrationService {
