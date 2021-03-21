@@ -3,7 +3,6 @@ USE `psa`;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-    `aid`  int NOT NULL,
     `email`   VARCHAR(255)  NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `dateOfBirth` DateTime NOT NULL,
