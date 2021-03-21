@@ -1,52 +1,30 @@
 package g1t2.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "dothack_registration")
+@Table(name = "registration_table")
 public class Registration {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer rid;
+    private String emailSuffix;
 
-    @ManyToOne
-    @JoinColumn(name = "sid") // Student id
-    private Student student;
-
-    @ManyToOne
-    @JoinColumn(name = "cid") // alert id
-    private Course course;
-
-    private String semester;
-
-    public void setStudent(Student student) {
-        this.student = student;
+    public Registration() {
+    	
     }
-
-    public void setCourse(Course course) {
-        this.course = course;
+    
+    public Registration(String emailSuffix) {
+    	this.emailSuffix = emailSuffix;
     }
+	public String getEmailSuffix() {
+		return emailSuffix;
+	}
 
-    public void setSemester(String semester) {
-        this.semester = semester;
-    }
+	public void setEmailSuffix(String emailSuffix) {
+		this.emailSuffix = emailSuffix;
+	}
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public String getSemester() {
-        return semester;
-    }
+   
 }
