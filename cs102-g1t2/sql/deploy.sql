@@ -3,14 +3,14 @@ USE `psa`;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-    `username`     VARCHAR(16)   NOT NULL,
-    `pwd`          VARCHAR(255)  NOT NULL,
-    `email`        VARCHAR(255) NOT NULL,
+    `aid`  int NOT NULL,
+    `email`   VARCHAR(255)  NOT NULL,
+    `password` VARCHAR(255) NOT NULL,
+    `dateOfBirth` DateTime NOT NULL,
     PRIMARY KEY(`email`),
     UNIQUE  (`username`)
 );
-INSERT INTO `user` (`username`, `pwd`, `email`) VALUES ('apple', 'apple123', 'apple@fruitmail.com');
-INSERT INTO `user` (`username`, `pwd`, `email`) VALUES ('orange', 'orange123', 'orange@fruitmail.com');
+
 
 DROP TABLE IF EXISTS `vessel`;
 CREATE TABLE IF NOT EXISTS `vessel` (
