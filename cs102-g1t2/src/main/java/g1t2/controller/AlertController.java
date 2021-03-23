@@ -1,14 +1,17 @@
 package g1t2.controller;
 
 import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import g1t2.entities.Alert;
 import g1t2.service.AlertService;
 
+@RestController
 public class AlertController {
 	private AlertService alertService;
 
