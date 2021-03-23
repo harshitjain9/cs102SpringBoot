@@ -28,7 +28,7 @@ public class RegistrationController {
 	//POST
 	//	@RequestMapping(method=RequestMethod.POST, value="/createNewEmailSuffix")
 	@PostMapping("/createNewEmailSuffix")
-	public Registration createNewEmailSuffix(Registration registration) {
+	public Registration createNewEmailSuffix(@PathVariable Registration registration) {
 		return RService.saveEmailSuffixInDB(registration);
 	}
 	
