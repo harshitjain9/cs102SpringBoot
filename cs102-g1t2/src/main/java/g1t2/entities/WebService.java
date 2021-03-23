@@ -3,13 +3,11 @@ package g1t2.entities;
 import java.util.Base64;
 
 import javax.persistence.Entity;
-
-//import org.springframework.data.annotation.Id;
-// halp i'm not sure which Id to import
-
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "WebService_table")
 public class WebService {
 	@Id
     private int id = 1;
@@ -25,7 +23,9 @@ public class WebService {
     	
 	}
 
-	public Integer getId(){return id; }
+	public Integer getId(){
+		return id; 
+	}
 
     public String getApiKey(){
         return apiKey;
