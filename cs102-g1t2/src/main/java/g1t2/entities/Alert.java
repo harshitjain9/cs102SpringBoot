@@ -1,15 +1,24 @@
 package g1t2.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "alert_table")
 public class Alert {
+	@Id
 	private String email;
+	@Id
 	private String abbrVslM;
+	@Id
 	private String inVoyN;
 	
+	@OneToMany(mappedBy = "alert_triggered")
+	private Set<Alert> alerts;
 	
 	public Alert() {
 		

@@ -14,7 +14,7 @@ public class AlertTriggered {
 //	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //	String DateTime = sdf.format(dt);
 	@Id
-	@ManyToOne
+	@ManyToOne(targetEntity = Alert.class)  
 	private Alert alert;
 	@Id
 	private String dateTime;
@@ -44,6 +44,7 @@ public class AlertTriggered {
 	public void setDateTime(String dateTime) {
 		this.dateTime = dateTime;
 	}
+
 	
 	
 }
