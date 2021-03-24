@@ -13,18 +13,18 @@ public class EmailServerController {
     @Autowired
     private EmailServerService service;
 
-    @PostMapping("/addEmailServerService")
-    public EmailServer saveEmailServer(@RequestBody EmailServer emailServer){
-        return service.saveEmailServer(emailServer);
+    @PostMapping("/createNewEmailServer")
+    public EmailServer createNewEmailServer(@RequestBody EmailServer emailServer){
+        return service.createNewEmailServer(emailServer);
     }
 
-    @PostMapping("/updateEmailServerservice/")
-    public void replaceEmailServer(@RequestBody EmailServer emailServer){
-        service.replaceEmailServer(emailServer);
+    @PostMapping("/updateEmailServer/")
+    public void updateEmailServer(@RequestBody EmailServer emailServer){
+        service.updateEmailServer(emailServer);
     }
 
-    @GetMapping("/getByEmailServerId/{id}")
-    public EmailServer getEmailServerById(@PathVariable int id) {
+    @GetMapping("/getEmailServer/{id}")
+    public EmailServer getEmailServer(@PathVariable int id) {
         return service.getEmailServer(id);
     }
 }

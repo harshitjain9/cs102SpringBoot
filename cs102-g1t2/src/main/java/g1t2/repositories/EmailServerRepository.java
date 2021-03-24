@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class EmailServerRepository extends JpaRepository <EmailServer, Integer> {
-	String deleteById(String id) {
-        
+	String deleteById(Integer id) {
+
     };
 }

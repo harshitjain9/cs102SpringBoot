@@ -10,7 +10,7 @@ public class EmailServerService<JavaMailSender> {
         this.javaMailSender = javaMailSender;
     }
 	
-	public EmailServer saveEmailServer(EmailServer emailServer) {
+	public EmailServer createNewEmailServer(EmailServer emailServer) {
 		return repository.save(emailServer);
 	}
 
@@ -18,7 +18,7 @@ public class EmailServerService<JavaMailSender> {
         return repository.findById(id).orElse(null);
     }
 
-    public void replaceEmailServer(EmailServer emailServer){
+    public void updateEmailServer(EmailServer emailServer){
         repository.deleteById(emailServer.getId());
         repository.save(emailServer);
     }
