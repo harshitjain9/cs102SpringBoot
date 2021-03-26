@@ -21,7 +21,7 @@ public class WebServiceController {
 
     @PostMapping("/addWebservice/")
     public WebService saveWebserviceController(@RequestBody WebService webservice){
-        return service.saveWebservice(webserviceInstructions.hashingApiKey());
+        return service.saveWebservice(webservice.hashingApiKey());
     }
 
     @PostMapping("/updateWebservice/")
