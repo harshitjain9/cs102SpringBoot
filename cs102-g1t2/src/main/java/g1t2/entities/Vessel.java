@@ -13,6 +13,12 @@ public class Vessel {
 	private String berthN;
 	private String status;
 	
+	public Vessel() {
+		
+	}
+	public Vessel(String fullVslM, String abbrVslM, String inVoyN, String fullInVoyN) {
+		
+	}
 	
 	public String getFullVslM() {
 		return fullVslM;
