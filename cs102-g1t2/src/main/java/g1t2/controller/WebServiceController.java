@@ -21,7 +21,7 @@ public class WebServiceController {
 
     @PostMapping("/addWebservice/")
     public WebService saveWebserviceController(@RequestBody WebService webservice){
-        return service.saveWebservice(webserviceInstructions.hashingApiKey());
+        return service.saveWebservice(webservice.hashingApiKey());
     }
 
     @PostMapping("/updateWebservice/")
@@ -45,7 +45,7 @@ public class WebServiceController {
             scheduleTaskDaily.initializeScheduler();
             return "Data replaced successfully.";
         } else{
-            service.replaceWebserviceInstructions(webserviceInstructions.hashingApiKey());
+            service.replaceWebserviceInstructions(webservice.hashingApiKey());
             scheduleTaskDaily.initializeScheduler();
             return "Data replaced successfully.";
         }
