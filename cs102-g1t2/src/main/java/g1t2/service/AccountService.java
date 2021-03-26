@@ -39,8 +39,12 @@ public class AccountService {
 		return "Account update successful.";
 	}
 	
-	public void deleteAccount(String email) {
-		accountRepository.deleteById(email);
+	public String deleteAccount(String email) {
+		if (getAccountByEmail(email) != null) {
+			accountRepository.deleteById(email);
+			return "Account delete successful.";
+		}
+		return "Account delete unsuccessful. Account doesn't exist.";
 	}
 
 }
