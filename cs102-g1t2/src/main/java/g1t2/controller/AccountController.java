@@ -40,7 +40,7 @@ public class AccountController {
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/accounts/{email}")
-	public void deleteTopic(@PathVariable String email) {
-		accountService.deleteAccount(email);
+	public String deleteAccount(@PathVariable String email) {
+		return accountService.deleteAccount(email);
 	}
 }
