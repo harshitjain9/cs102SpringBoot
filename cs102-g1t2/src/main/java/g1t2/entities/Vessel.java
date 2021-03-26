@@ -1,11 +1,16 @@
 package g1t2.entities;
 
+import javax.persistence.Id;
+
 public class Vessel {
 	
+	@Id
+	private String abbrVslM;
+	
+	@Id
+	private String inVoyN;
 	
 	private String fullVslM;
-	private String abbrVslM;
-	private String inVoyN;
 	private String fullInVoyN;
 	private String outVoyN;
 	private String btrDt;
@@ -16,8 +21,16 @@ public class Vessel {
 	public Vessel() {
 		
 	}
-	public Vessel(String fullVslM, String abbrVslM, String inVoyN, String fullInVoyN) {
-		
+	public Vessel(String fullVslM, String abbrVslM, String inVoyN, String fullInVoyN, String outVoyN, String btrDt, String unbthgDt, String berthN, String status) {
+		this.fullVslM = fullVslM;
+		this.abbrVslM = abbrVslM;
+		this.inVoyN = inVoyN;
+		this.fullInVoyN = fullInVoyN;
+		this.outVoyN = outVoyN;
+		this.btrDt = btrDt;
+		this.unbthgDt = unbthgDt;
+		this.berthN = berthN;
+		this.status = status;
 	}
 	
 	public String getFullVslM() {

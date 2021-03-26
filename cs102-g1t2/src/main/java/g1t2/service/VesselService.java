@@ -34,7 +34,7 @@ public class VesselService {
 		return "Vessel added successfully.";
 	}
 	
-	public String updateVessel(Vessel vessel) {
+	public String updateVessel(String abbrVslM, String inVoyN, String outVoyN, Vessel vessel) {
 		vesselRepository.save(vessel);
 		return "Vessel successfully updated.";
 	}
