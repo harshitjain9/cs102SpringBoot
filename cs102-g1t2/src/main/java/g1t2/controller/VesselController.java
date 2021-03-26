@@ -21,9 +21,9 @@ public class VesselController {
 		return vesselService.getAllVessels();
 	}
 	
-	@RequestMapping("/accounts/{abbrVslM}/{inVoyN}/{outVoyN}")
-	public Vessel getVessel(@PathVariable String abbrVslM, @PathVariable String inVoyN, @PathVariable String outVoyN) {
-		return vesselService.getVesselByKey(abbrVslM, inVoyN, outVoyN);
+	@RequestMapping("/accounts/{abbrVslM}/{inVoyN}")
+	public Vessel getVessel(@PathVariable String abbrVslM, @PathVariable String inVoyN) {
+		return vesselService.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/vessels")

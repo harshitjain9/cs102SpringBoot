@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import g1t2.entities.Alert;
+import g1t2.entities.AlertComposite;
 
-//@Repository
-public interface AlertRepository extends JpaRepository<Alert, String> {
+@Repository
+public interface AlertRepository extends JpaRepository<Alert, AlertComposite> {
 	//INHERITING THEN OVERLOADING
-//	void deleteById(String email, String abbrVslM, String inVoyN);
-//	List<Alert> findAllById(String email);
-//	List<Alert> findAllById(String abbrVslM, String inVoyN);
+	List<Alert> findByEmail(String email);
+    List<Alert> findByAbbrVslMAndInVoyN(String abbrVslM, String inVoyN);
 	
 }
 

@@ -1,7 +1,13 @@
 package g1t2.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 
+@Entity
+@IdClass(VesselComposite.class)
+@Table(name = "VESSEL_TBL")
 public class Vessel {
 	
 	@Id
@@ -13,7 +19,7 @@ public class Vessel {
 	private String fullVslM;
 	private String fullInVoyN;
 	private String outVoyN;
-	private String btrDt;
+	private String bthgDt;
 	private String unbthgDt;
 	private String berthN;
 	private String status;
@@ -27,7 +33,7 @@ public class Vessel {
 		this.inVoyN = inVoyN;
 		this.fullInVoyN = fullInVoyN;
 		this.outVoyN = outVoyN;
-		this.btrDt = btrDt;
+		this.bthgDt = btrDt;
 		this.unbthgDt = unbthgDt;
 		this.berthN = berthN;
 		this.status = status;
@@ -64,10 +70,10 @@ public class Vessel {
 		this.outVoyN = outVoyN;
 	}
 	public String getBtrDt() {
-		return btrDt;
+		return bthgDt;
 	}
 	public void setBtrDt(String btrDt) {
-		this.btrDt = btrDt;
+		this.bthgDt = btrDt;
 	}
 	public String getUnbthgDt() {
 		return unbthgDt;
