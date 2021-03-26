@@ -1,10 +1,12 @@
 package g1t2.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Account {
 	
+	@Id
 	private String email;
 	private String password;
 	private String dateOfBirth;
