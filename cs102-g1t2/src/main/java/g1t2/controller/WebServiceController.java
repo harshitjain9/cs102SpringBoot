@@ -45,7 +45,7 @@ public class WebServiceController {
             scheduleTaskDaily.initializeScheduler();
             return "Data replaced successfully.";
         } else{
-            service.replaceWebserviceInstructions(webserviceInstructions.hashingApiKey());
+            service.replaceWebserviceInstructions(webservice.hashingApiKey());
             scheduleTaskDaily.initializeScheduler();
             return "Data replaced successfully.";
         }
