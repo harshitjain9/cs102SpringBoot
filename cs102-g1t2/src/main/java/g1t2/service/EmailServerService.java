@@ -1,18 +1,22 @@
 package g1t2.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
 import g1t2.entities.EmailServer;
 import g1t2.repositories.EmailServerRepository;
 
 @Service
 public class EmailServerService {
+	
+	private JavaMailSender javaMailSender;
+	
 	@Autowired
 	private EmailServerRepository repository;
-	private JavaMailSender javaMailSender;
+	
+	
 	
 	public EmailServerService (JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
@@ -22,7 +26,7 @@ public class EmailServerService {
 		return repository.save(emailServer);
 	}
 
-    public EmailServer getEmailServer(Integer id) {
+    public EmailServer getEmailServer(String id) {
         return repository.findById(id).orElse(null);
     }
 

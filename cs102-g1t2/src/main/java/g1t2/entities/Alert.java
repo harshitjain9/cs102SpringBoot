@@ -12,13 +12,13 @@ import javax.persistence.Table;
 public class Alert {
 	@Id
 	private String email;
-	@Id
+	
 	private String abbrVslM;
-	@Id
+	
 	private String inVoyN;
 	
-	@OneToMany(mappedBy = "alert_triggered")
-	private Set<Alert> alerts;
+//	@OneToMany(mappedBy = "alert_triggered")
+//	private Set<Alert> alerts;
 	
 	public Alert() {
 		

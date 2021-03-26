@@ -15,7 +15,7 @@ public class WebServiceService {
     	return repository.save(webservice);
     }
 
-    public WebService getWebserviceById(Integer id) {
+    public WebService getWebserviceById(int id) {
     	return repository.findById(id).orElse(null);
     }
 

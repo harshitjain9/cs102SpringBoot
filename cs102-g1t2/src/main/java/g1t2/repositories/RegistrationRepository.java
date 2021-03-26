@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import g1t2.entities.Registration;
 
 @Repository
-public interface RegistrationRepository extends JpaRepository<Registration, Integer> {
+public interface RegistrationRepository extends JpaRepository<Registration, String> {
 	void deleteById(String emailSuffix);
 }

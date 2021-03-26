@@ -27,7 +27,7 @@ public class EmailServerController {
     }
 
     @GetMapping("/getEmailServer/{id}")
-    public EmailServer getEmailServer(@PathVariable int id) {
+    public EmailServer getEmailServer(@PathVariable String id) {
         return service.getEmailServer(id);
     }
 }

@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import g1t2.entities.Course;
-import g1t2.entities.Registration;
-import g1t2.entities.Student;
-import g1t2.repositories.CourseRepository;
-import g1t2.repositories.RegistrationRepository;
-import g1t2.repositories.StudentRepository;
+//import g1t2.entities.Course;
+//import g1t2.entities.Registration;
+//import g1t2.entities.Student;
+//import g1t2.repositories.CourseRepository;
+//import g1t2.repositories.RegistrationRepository;
+//import g1t2.repositories.StudentRepository;
 
 @RestController
 @RequestMapping("/dothack")

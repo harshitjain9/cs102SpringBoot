@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import g1t2.entities.Alert;
 
-@Repository
-public interface AlertRepository extends JpaRepository<Alert, Integer> {
+//@Repository
+public interface AlertRepository extends JpaRepository<Alert, String> {
 	//INHERITING THEN OVERLOADING
-	void deleteById(String email, String abbrVslM, String inVoyN);
-	List<Alert> findAllById(String email);
-	List<Alert> findAllById(String abbrVslM, String inVoyN);
+//	void deleteById(String email, String abbrVslM, String inVoyN);
+//	List<Alert> findAllById(String email);
+//	List<Alert> findAllById(String abbrVslM, String inVoyN);
 	
 }
 

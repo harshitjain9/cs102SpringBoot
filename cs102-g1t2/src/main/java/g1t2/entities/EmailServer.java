@@ -1,6 +1,12 @@
 package g1t2.entities;
 
+import javax.persistence.Entity;
+
+import javax.persistence.Id;
+
+@Entity
 public class EmailServer {
+	@Id
 	private String id;
 	private String server;
 	private String senderEmail;
