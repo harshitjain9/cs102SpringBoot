@@ -28,7 +28,16 @@ public class VesselService {
 	
 	public String addVesselByKey(Vessel vessel) {
 		if (getVesselByKey(vessel.getAbbrVslM(), vessel.getInVoyN(), vessel.getOutVoyN()) != null) {
-			return "
+			return "Adding vessel unsuccessful. Vessel already exists.";
 		}
+		vesselRepository.save(vessel);
+		return "Vessel added successfully.";
 	}
+	
+	public String updateVessel(Vessel vessel) {
+		vesselRepository.save(vessel);
+		return "Vessel successfully updated.";
+	}
+	
+	public 
 }
