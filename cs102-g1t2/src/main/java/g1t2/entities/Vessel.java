@@ -1,9 +1,7 @@
 package g1t2.entities;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 public class Vessel {
 	
 	@Id
