@@ -21,12 +21,12 @@ public class VesselService {
 	
 	public Vessel getVesselByKey(String abbrVslM, String inVoyN, String outVoyN) {
 		if (outVoyN == null) {
-			return vesselRepository.findByAbbr_InVoy(abbrVslM, inVoyN);
+			return vesselRepository.findByAbbrVoy(abbrVslM, inVoyN);
 		}
-		return vesselRepository.findByAbbr_InVoy(abbrVslM, outVoyN);
+		return vesselRepository.findByAbbrVoy(abbrVslM, outVoyN);
 	}
 	
-	public String addVesselByKey(Vessel vessel) {
+	public String addVessel(Vessel vessel) {
 		if (getVesselByKey(vessel.getAbbrVslM(), vessel.getInVoyN(), vessel.getOutVoyN()) != null) {
 			return "Adding vessel unsuccessful. Vessel already exists.";
 		}
@@ -39,5 +39,15 @@ public class VesselService {
 		return "Vessel successfully updated.";
 	}
 	
-	public 
+	public String deleteVessel(String abbrVslM, String inVoyN, String outVoyN) {
+		if (getVesselByKey(abbrVslM, inVoyN, outVoyN) != null) {
+			if (outVoyN == null) {
+				vesselRepository.deleteByAbbrVoy(abbrVslM, inVoyN);
+			} else {
+				vesselRepository.deleteByAbbrVoy(abbrVslM, outVoyN);
+			}
+			return "Vessel successfully deleted.";
+		}
+		return "Vessel deletion unsuccessful. Vessel doesn't exist.";
+	}
 }
