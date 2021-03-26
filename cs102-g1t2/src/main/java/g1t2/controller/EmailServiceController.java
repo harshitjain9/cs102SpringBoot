@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import g1t2.entities.EmailServer;
+import g1t2.service.EmailServerService;
+
 @RestController
 public class EmailServerController {
 
