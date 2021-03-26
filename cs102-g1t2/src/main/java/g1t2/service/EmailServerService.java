@@ -3,12 +3,13 @@ package g1t2.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import g1t2.entities.EmailServer;
 import g1t2.repositories.EmailServerRepository;
 
 @Service
-public class EmailServerService<JavaMailSender> {
+public class EmailServerService {
 	@Autowired
 	private EmailServerRepository repository;
 	private JavaMailSender javaMailSender;
