@@ -8,7 +8,7 @@ public class EmailServer {
 	public EmailServer() {
 		super();
 	}
-	public EmailServer(Integer id, String server, String senderEmail) {
+	public EmailServer(String id, String server, String senderEmail) {
 		super();
 		this.id = id;
 		this.server = server;
