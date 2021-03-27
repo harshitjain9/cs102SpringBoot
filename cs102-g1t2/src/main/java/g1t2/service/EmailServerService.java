@@ -45,11 +45,10 @@ public class EmailServerService {
 		EmailServer savedEmailServer = repository.save(emailServer);
 		return ResponseEntity.ok(savedEmailServer);
     }
-    public void sendEmail(String fromEmail, String toEmail, String subject, String message) {
+    public void sendEmail(String toEmail, String subject, String message) {
 
         var mailMessage = new SimpleMailMessage();
         
-        mailMessage.setFrom(fromEmail);
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
