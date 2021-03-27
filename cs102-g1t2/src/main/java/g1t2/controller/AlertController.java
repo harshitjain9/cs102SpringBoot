@@ -2,6 +2,7 @@ package g1t2.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,8 @@ import g1t2.service.AlertService;
 
 @RestController
 public class AlertController {
+	
+	@Autowired
 	private AlertService alertService;
 
 	//GET
@@ -36,16 +39,15 @@ public class AlertController {
 	
 	
 	//POST
-	@PostMapping("/saveAlertInDB/{alert}")
-	public ResponseEntity<Alert> saveAlertInDB(@PathVariable Alert alert) {
+	@PostMapping("/saveAlertInDB")
+	public ResponseEntity<Alert> saveAlertInDB(@RequestBody Alert alert) {
 		return alertService.saveAlertInDB(alert);
 	}
 	
-	@PostMapping("/saveAlertInDB/{alertList}")
-	public ResponseEntity<List<Alert>> saveAlertsInDB(@PathVariable List<Alert> alertList) {
+	@PostMapping("/saveAlertsInDB")
+	public ResponseEntity<List<Alert>> saveAlertsInDB(@RequestBody List<Alert> alertList) {
 		return alertService.saveAlertsInDB(alertList);
 	}
-	
 	
 	
 	//DELETE
