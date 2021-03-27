@@ -22,7 +22,7 @@ public class VesselController {
 		return vesselService.getAllVessels();
 	}
 	
-	@RequestMapping("/accounts/{abbrVslM}/{inVoyN}")
+	@RequestMapping("/vessels/{abbrVslM}/{inVoyN}")
 	public ResponseEntity<Vessel> getVessel(@PathVariable String abbrVslM, @PathVariable String inVoyN) {
 		return vesselService.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
 	}
@@ -32,12 +32,12 @@ public class VesselController {
 		return vesselService.addVessel(vessel);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/accounts/{abbrVslM}/{inVoyN}/{outVoyN}")
+	@RequestMapping(method=RequestMethod.PUT, value="/vessels/{abbrVslM}/{inVoyN}/{outVoyN}")
 	public ResponseEntity<Vessel> updateVessel(@PathVariable String abbrVslM, @PathVariable String inVoyN, @PathVariable String outVoyN, @RequestBody Vessel vessel) {
 		return vesselService.updateVessel(abbrVslM, inVoyN, outVoyN, vessel);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/accounts/{abbrVslM}/{inVoyN}/{outVoyN}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/vessels/{abbrVslM}/{inVoyN}/{outVoyN}")
 	public ResponseEntity<Void> deleteVessel(@PathVariable String abbrVslM, @PathVariable String inVoyN, @PathVariable String outVoyN) {
 		return vesselService.deleteVessel(abbrVslM, inVoyN, outVoyN);
 	}

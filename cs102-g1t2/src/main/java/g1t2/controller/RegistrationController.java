@@ -2,6 +2,7 @@ package g1t2.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,23 +22,24 @@ public class RegistrationController {
 	//GET
 	//@RequestMapping("/getAllEmailSuffix")
 	@GetMapping("/getAllEmailSuffix")
-	public List<Registration> getAllEmailSuffix() {
+	public ResponseEntity<List<Registration>> getAllEmailSuffix() {
 		return RService.getAllEmailSuffix();
 	}
 	
 	//POST
 	//	@RequestMapping(method=RequestMethod.POST, value="/createNewEmailSuffix")
 	@PostMapping("/createNewEmailSuffix")
-	public Registration createNewEmailSuffix(@PathVariable Registration registration) {
+	public ResponseEntity<Registration> createNewEmailSuffix(@PathVariable Registration registration) {
 		return RService.saveEmailSuffixInDB(registration);
 	}
 	
 	
 	//DELETE
 	@DeleteMapping("/deleteEmailSuffix/{emailSuffix}")
-    public void deleteEmailSuffix(@PathVariable String emailSuffix){
-        RService.deleteEmailSuffix(emailSuffix);
+    public ResponseEntity<Void> deleteEmailSuffix(@PathVariable String emailSuffix){
+        return RService.deleteEmailSuffix(emailSuffix);
 	}
+	
 	
 	
 

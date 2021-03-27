@@ -18,9 +18,7 @@ public class AccountService {
 	private AccountRepository accountRepository;
 	
 	public ResponseEntity<List<Account>> getAllAccounts() {
-		List<Account> accounts = new ArrayList<>();
-		accountRepository.findAll()
-		.forEach(accounts::add);
+		List<Account> accounts = accountRepository.findAll();
 		return ResponseEntity.ok(accounts);
 	}
 	

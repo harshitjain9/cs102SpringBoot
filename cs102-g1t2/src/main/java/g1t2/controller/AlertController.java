@@ -2,6 +2,7 @@ package g1t2.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,29 +20,29 @@ public class AlertController {
 
 	//GET
 	@GetMapping("/getAllAlerts")
-	public List<Alert> getAllAlerts() {
+	public ResponseEntity<List<Alert>> getAllAlerts() {
 		return alertService.getAllAlerts();
 	}
 	
 	@GetMapping("/getAlertsAccordingToUser/{email}")
-	public List<Alert> getAlertsAccordingToUser(@PathVariable String email) {
+	public ResponseEntity<List<Alert>> getAlertsAccordingToUser(@PathVariable String email) {
 		return alertService.getAlertsAccordingToUser(email);
 	}
 	
 	@GetMapping("/getAlertsAccordingToVesselId/{abbrVslM}/{inVoyN}")
-	public List<Alert> getAlertsAccordingToVesselId(String abbrVslM, String inVoyN) {
+	public ResponseEntity<List<Alert>> getAlertsAccordingToVesselId(String abbrVslM, String inVoyN) {
 		return alertService.getAlertsAccordingToVesselId(abbrVslM, inVoyN);
 	}
 	
 	
 	//POST
 	@PostMapping("/saveAlertInDB/{alert}")
-	public Alert saveAlertInDB(@PathVariable Alert alert) {
+	public ResponseEntity<Alert> saveAlertInDB(@PathVariable Alert alert) {
 		return alertService.saveAlertInDB(alert);
 	}
 	
 	@PostMapping("/saveAlertInDB/{alertList}")
-	public List<Alert> saveAlertsInDB(@PathVariable List<Alert> alertList) {
+	public ResponseEntity<List<Alert>> saveAlertsInDB(@PathVariable List<Alert> alertList) {
 		return alertService.saveAlertsInDB(alertList);
 	}
 	
@@ -49,7 +50,7 @@ public class AlertController {
 	
 	//DELETE
 	@DeleteMapping("/deleteAlert")
-    public void deleteSubscription(@RequestBody AlertComposite alertComposite ){
-        alertService.deleteAlert(alertComposite);
+    public ResponseEntity<Void> deleteSubscription(@RequestBody AlertComposite alertComposite){
+        return alertService.deleteAlert(alertComposite);
     }
 }
