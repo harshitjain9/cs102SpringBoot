@@ -33,7 +33,7 @@ public class EmailServerService {
 
     public ResponseEntity<Optional<EmailServer>> getEmailServer(String id) {
     	Optional<EmailServer> emailServer = repository.findById(id);
-        if (emailServer == null) {
+        if (emailServer.isEmpty()) {
         	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(emailServer);
