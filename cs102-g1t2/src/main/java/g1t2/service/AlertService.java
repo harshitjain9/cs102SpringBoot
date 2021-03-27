@@ -3,6 +3,8 @@ package g1t2.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import g1t2.entities.Alert;
@@ -16,33 +18,39 @@ public class AlertService {
 	private AlertRepository repository;
 	
 	//GET
-	public List<Alert> getAllAlerts() {
-		return repository.findAll();
+	public ResponseEntity<List<Alert>> getAllAlerts() {
+		List<Alert> alerts = repository.findAll();
+		return ResponseEntity.ok(alerts);
 	}
 	
 	
-	public List<Alert> getAlertsAccordingToUser(String email) {
-		return repository.findByEmail(email);
+	public ResponseEntity<List<Alert>> getAlertsAccordingToUser(String email) {
+		List<Alert> alerts = repository.findByEmail(email);
+		return ResponseEntity.ok(alerts);
 	}
 	
-	public List<Alert> getAlertsAccordingToVesselId(String abbrVslM, String inVoyN) {
-		return repository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+	public ResponseEntity<List<Alert>> getAlertsAccordingToVesselId(String abbrVslM, String inVoyN) {
+		List<Alert> alerts = repository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+		return ResponseEntity.ok(alerts);
 	}
 	
 	//POST
-	public Alert saveAlertInDB(Alert alert) {
-		return repository.save(alert);
+	public ResponseEntity<Alert> saveAlertInDB(Alert alert) {
+		repository.save(alert);
+		return ResponseEntity.status(HttpStatus.CREATED).body(alert);
 		
 	}
 	
-	public List<Alert> saveAlertsInDB(List<Alert> alertList) {
-		return repository.saveAll(alertList);
+	public ResponseEntity<List<Alert>> saveAlertsInDB(List<Alert> alertList) {
+		repository.saveAll(alertList);
+		return ResponseEntity.status(HttpStatus.CREATED).body(alertList);
 	}
 	
-	
 	//DELETE
-	public void deleteAlert(AlertComposite alertComposite) {
+	public ResponseEntity<Void> deleteAlert(AlertComposite alertComposite) {
         repository.deleteById(alertComposite);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+	
 	
 }

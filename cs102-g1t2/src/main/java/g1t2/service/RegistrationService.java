@@ -28,8 +28,4 @@ public class RegistrationService {
         repository.deleteById(emailSuffix);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-    
-    public void random() {
-    	
-    }
 }
