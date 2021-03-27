@@ -1,9 +1,39 @@
 package g1t2.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
+import g1t2.entities.WebService;
+import g1t2.service.WebServiceService;
+
+@RestController
 public class WebServiceController {
+	
+	@Autowired
+	private WebServiceService webServiceService;
+	
+	
+	@RequestMapping("/getById/{id}")
+	public ResponseEntity<WebService> getWebserviceById(@PathVariable int id) {
+		return webServiceService.getWebserviceById(id);
+	}
+		
+	@RequestMapping("/addWebservice/")
+    public ResponseEntity<WebService> saveWebserviceController(@RequestBody WebService webservice){
+        return webServiceService.saveWebservice(webservice.hashingApiKey());
+    }
+	
+	@RequestMapping("/updateWebservice/")
+	public ResponseEntity<WebService> replaceWebserviceInstructions(@RequestBody WebService webservice) {
+		return webServiceService.replaceWebserviceInstructions(webservice);
+	}
+	
+	
+	
 //	@Autowired
 //    private ScheduleTaskDaily scheduleTaskDaily;
 //
