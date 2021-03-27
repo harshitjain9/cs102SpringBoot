@@ -51,18 +51,13 @@ public class SenseChangeInTime {
             String msg = "The berthing time has updated from "+oldBthgDt+" to "+newBthgDt
                     +"\nThe departure time has updated from "+oldUnbthgDt+" to "+newUnbthgDt;
             try{
-                emailServerService.sendMail(sendTo,subject,msg);
+                emailServerService.sendEmail(sendTo,subject,msg);
             }catch(Exception e){
                 System.out.println("Failed to send email");
             }
         }
     }
-//	    public void emailAllSubscribersWithServer (String server, String senderEmail,List<Subscription> subList, String oldBthgDt, String newBthgDt, String
-//	            oldUnbthgDt, String newUnbthgDt){
-//	        for (Subscription subscription : subList) {
-//	            subscription.sendEmailWithServer(server, senderEmail,oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt);
-//	        }
-//	    }
+
 
     public void toEmailIfBerthOrDepartTimeChange(Vessel newVessel, Vessel existingVessel){
         System.out.println("retrieved existing vessel");
@@ -86,26 +81,26 @@ public class SenseChangeInTime {
             String firstBerthTimeString = existingVessel.getFirstBthgDt();
             String oldBerthTimeString = existingVessel.getBthgDt();
             String newBerthTimeString = newVessel.getBthgDt();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");//2020-11-16T13:00:00
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");//2021-03-27T11:41:00
 
-            if (hasTimeChanged(oldBerthTimeString, newBerthTimeString)) {//if berthing time change
+            if (hasTimeChanged(oldBerthTimeString, newBerthTimeString)) {//if there is a change in berthing time
                 Date firstBerthTime = format.parse(firstBerthTimeString);
                 Date newBerthTime = format.parse(newBerthTimeString);
-                existingVessel.changeCountPlusOne(); //
-                newVessel.setChangeCount(existingVessel.getChangeCount());
-                long diff = Math.abs(firstBerthTime.getTime() - newBerthTime.getTime()); //time diff in miliseconds
-                long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(diff); //time diff in minutes
-                if (diffInMinutes >= 60) {
+                existingVessel.incrementCount(); //
+                newVessel.setCount(existingVessel.getCount());
+                long diff = Math.abs(firstBerthTime.getTime() - newBerthTime.getTime()); //Difference in old and new berthing time in milliseconds
+                long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(diff); //Difference in old and new berthing time in minutes
+                if (diffInMinutes >= 60) { // new berthing time changed by more than 60mins (huge change)
                     newVessel.setDisplayColor("red");
-                } else if (diffInMinutes < 60 && diffInMinutes > 0) {
+                } else if (diffInMinutes < 60 && diffInMinutes > 0) { // new berthing time changed by less than 60 mins
                     newVessel.setDisplayColor("yellow");
-                } else if (diffInMinutes == 0) { // when new berthing time change back to the first pulled berthing time
+                } else if (diffInMinutes == 0) { // new berthing time same as old berthing time
                     newVessel.setDisplayColor("white");
                 }
 
             }else{
                 newVessel.setDisplayColor(existingVessel.getDisplayColor());
-                newVessel.setChangeCount(existingVessel.getChangeCount());
+                newVessel.setCount(existingVessel.getCount());
             }
             newVessel.setFirstBthgDt(existingVessel.getFirstBthgDt());
             vesselList.add(newVessel);
@@ -113,10 +108,10 @@ public class SenseChangeInTime {
         } else {//if it is a new vessel
             newVessel.setFirstBthgDt(newVessel.getBthgDt());
             newVessel.setDisplayColor("white");
-            newVessel.setChangeCount(0);
+            newVessel.setCount(0);
             vesselList.add(newVessel);
         }
 
     }
-	}
+	
 }
