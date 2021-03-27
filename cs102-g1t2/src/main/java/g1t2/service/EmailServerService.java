@@ -34,11 +34,10 @@ public class EmailServerService {
         repository.deleteById(emailServer.getId());
         repository.save(emailServer);
     }
-    public void sendEmail(String fromEmail, String toEmail, String subject, String message) {
+    public void sendEmail(String toEmail, String subject, String message) {
 
         var mailMessage = new SimpleMailMessage();
         
-        mailMessage.setFrom(fromEmail);
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);

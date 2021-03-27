@@ -69,10 +69,10 @@ public class Vessel {
 	public void setOutVoyN(String outVoyN) {
 		this.outVoyN = outVoyN;
 	}
-	public String getBtrDt() {
+	public String getBthgDt() {
 		return bthgDt;
 	}
-	public void setBtrDt(String btrDt) {
+	public void setBthgDt(String btrDt) {
 		this.bthgDt = btrDt;
 	}
 	public String getUnbthgDt() {
