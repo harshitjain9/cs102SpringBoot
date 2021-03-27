@@ -40,8 +40,12 @@ public class SenseChangeInTime {
 
 
 
-    public ResponseEntity<List<Alert>> getSubscriptionListForVessel (Vessel newVessel){
+    public ResponseEntity<List<Alert>> getAlertListForVessel (Vessel newVessel){
         return alertService.getAlertsAccordingToVesselId(newVessel.getAbbrVslM(), newVessel.getInVoyN());
+    }
+    
+    public List<Alert> getAlertListVessel(Vessel newVessel){
+        return alertService.getAlertsAccordingToVesselIdNonResponseEntity(newVessel.getAbbrVslM(), newVessel.getInVoyN());
     }
 
     public void emailAllSubscribers(String vesselName, List<Alert> subList, String oldBthgDt, String newBthgDt, String
@@ -70,10 +74,11 @@ public class SenseChangeInTime {
             String newUnbthgDt = newVessel.getUnbthgDt();
 
             if (hasBerthOrDepartTimeChanged(oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt)) {
-                emailAllSubscribers(vesselName, getSubscriptionListForVessel(newVessel), oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt);
+                emailAllSubscribers(vesselName, getAlertListVessel(newVessel), oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt);
             }
         }
-
+        			// remember to create a new
+        		// getSubscriptionListForVessel(newVessel) method in repo and rename it for Alert
     }
 
     public void operationsUponBerthTimeChange(Vessel newVessel,Vessel existingVessel, List<Vessel> vesselList ) throws ParseException {
@@ -106,7 +111,7 @@ public class SenseChangeInTime {
             newVessel.setFirstBthgDt(existingVessel.getFirstBthgDt());
             vesselList.add(newVessel);
 
-        } else {//if it is a new vessel
+        } else {//if vessel returned is new
             newVessel.setFirstBthgDt(newVessel.getBthgDt());
             newVessel.setDisplayColor("white");
             newVessel.setCount(0);
