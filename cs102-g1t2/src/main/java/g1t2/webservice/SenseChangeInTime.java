@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 
 import g1t2.entities.Alert;
 import g1t2.entities.Vessel;
@@ -24,7 +25,7 @@ public class SenseChangeInTime {
     @Autowired
     private AlertService alertService;
 
-    public Vessel getExistingVessel(Vessel newVessel) {
+    public ResponseEntity<Vessel> getExistingVessel(Vessel newVessel) {
         return vesselService.findByAbbrVslMAndInVoyN(newVessel.getAbbrVslM(), newVessel.getInVoyN());
     }
 
@@ -39,7 +40,7 @@ public class SenseChangeInTime {
 
 
 
-    public List<Alert> getSubscriptionListForVessel (Vessel newVessel){
+    public ResponseEntity<List<Alert>> getSubscriptionListForVessel (Vessel newVessel){
         return alertService.getAlertsAccordingToVesselId(newVessel.getAbbrVslM(), newVessel.getInVoyN());
     }
 
