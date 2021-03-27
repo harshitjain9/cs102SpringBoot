@@ -3,6 +3,8 @@ package g1t2.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import g1t2.entities.Registration;
 import g1t2.repositories.RegistrationRepository;
@@ -13,15 +15,17 @@ public class RegistrationService {
 	@Autowired
     private RegistrationRepository repository;
 
-    public Registration saveEmailSuffixInDB(Registration registration) {
-    	return repository.save(registration);
+    public ResponseEntity<Registration> saveEmailSuffixInDB(Registration registration) {
+    	Registration savedRegistration = repository.save(registration);
+    	return ResponseEntity.status(HttpStatus.CREATED).body(savedRegistration);
     }
 
-    public List<Registration> getAllEmailSuffix(){
-        return repository.findAll();
+    public ResponseEntity<List<Registration>> getAllEmailSuffix(){
+        return ResponseEntity.ok(repository.findAll());
     }
 
-    public void deleteEmailSuffix(String emailSuffix){
+    public ResponseEntity<Void> deleteEmailSuffix(String emailSuffix){
         repository.deleteById(emailSuffix);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

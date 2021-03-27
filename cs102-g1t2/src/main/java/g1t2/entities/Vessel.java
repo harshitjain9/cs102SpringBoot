@@ -24,6 +24,12 @@ public class Vessel {
 	private String berthN;
 	private String status;
 	
+	// count refers to the number of times the timing has been updated
+	// used for SenseChangeInTime.java
+	private int count;
+    private String firstBthgDt;
+    private String displayColor;
+	
 	public Vessel() {
 		
 	}
@@ -69,10 +75,10 @@ public class Vessel {
 	public void setOutVoyN(String outVoyN) {
 		this.outVoyN = outVoyN;
 	}
-	public String getBtrDt() {
+	public String getBthgDt() {
 		return bthgDt;
 	}
-	public void setBtrDt(String btrDt) {
+	public void setBthgDt(String btrDt) {
 		this.bthgDt = btrDt;
 	}
 	public String getUnbthgDt() {
@@ -94,6 +100,35 @@ public class Vessel {
 		this.status = status;
 	}
 	
+	
+	// below getters and setters are for SenseChangeInTime.java
+	
+	public int getCount() {
+		return count;
+	}
+	public String getFirstBthgDt() {
+		return firstBthgDt;
+	}
+	public void setCount(int changeCount) {
+        this.count = changeCount;
+    }
+
+    public void setFirstBthgDt(String firstBthgDt) {
+        this.firstBthgDt = firstBthgDt;
+    }
+    
+    public void incrementCount() {
+        this.count++;
+    }
+	
+    
+    public String getDisplayColor() {
+		return displayColor;
+	}
+    
+	public void setDisplayColor(String displayColor) {
+		this.displayColor = displayColor;
+	}
 	
 	
 }

@@ -1,6 +1,10 @@
 package g1t2.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -22,27 +26,35 @@ public class EmailServerService {
         this.javaMailSender = javaMailSender;
     }
 	
-	public EmailServer createNewEmailServer(EmailServer emailServer) {
-		return repository.save(emailServer);
+	public ResponseEntity<EmailServer> createNewEmailServer(EmailServer emailServer) {
+		EmailServer savedEmailServer = repository.save(emailServer);
+		return ResponseEntity.status(HttpStatus.CREATED).body(savedEmailServer);
 	}
 
-    public EmailServer getEmailServer(String id) {
-        return repository.findById(id).orElse(null);
+    public ResponseEntity<Optional<EmailServer>> getEmailServer(String id) {
+    	Optional<EmailServer> emailServer = repository.findById(id);
+        if (emailServer.isEmpty()) {
+        	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(emailServer);
+        
     }
 
-    public void updateEmailServer(EmailServer emailServer){
+    public ResponseEntity<EmailServer> updateEmailServer(EmailServer emailServer){
         repository.deleteById(emailServer.getId());
-        repository.save(emailServer);
+		EmailServer savedEmailServer = repository.save(emailServer);
+		return ResponseEntity.ok(savedEmailServer);
     }
-    public void sendEmail(String fromEmail, String toEmail, String subject, String message) {
+    public void sendEmail(String toEmail, String subject, String message) {
 
         var mailMessage = new SimpleMailMessage();
         
-        mailMessage.setFrom(fromEmail);
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
 
         javaMailSender.send(mailMessage);
     }
+    
+    //done
 }

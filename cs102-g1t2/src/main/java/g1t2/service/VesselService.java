@@ -3,6 +3,7 @@ package g1t2.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import g1t2.repositories.VesselRepository;
 @Service
 public class VesselService {
 
+	@Autowired
 	private VesselRepository vesselRepository;
  
 	public ResponseEntity<List<Vessel>> getAllVessels() {
@@ -20,6 +22,7 @@ public class VesselService {
 		vesselRepository.findAll().forEach(vessels::add);
 		return ResponseEntity.ok(vessels);
 	}
+
  
 	public ResponseEntity<Vessel> findByAbbrVslMAndInVoyN(String abbrVslM, String inVoyN){
 		Vessel vessel = vesselRepository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
