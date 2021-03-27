@@ -7,5 +7,6 @@ import g1t2.entities.WebService;
 
 @Repository
 public interface WebServiceRepository extends JpaRepository <WebService, Integer>{
+	WebService findById(int id);
     WebService deleteById(int id);
 }
