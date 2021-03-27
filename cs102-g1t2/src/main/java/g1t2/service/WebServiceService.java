@@ -14,9 +14,13 @@ public class WebServiceService {
     private WebServiceRepository repository;
 
     public ResponseEntity<WebService> saveWebservice(WebService webservice) {
-//    	HttpStatus webServiceExists = getWebServiceById(webservice.getId()).get;
-    	
-    	return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(webservice));
+      HttpStatus webServiceExists = getWebserviceById(webservice.getId()).getStatusCode();
+      if (webServiceExists == HttpStatus.OK) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+      }
+      repository.save(webservice);
+      return ResponseEntity.status(HttpStatus.CREATED).body(webservice);
+
     }
 
     public ResponseEntity<WebService> getWebserviceById(int id) {
@@ -27,12 +31,12 @@ public class WebServiceService {
     	return ResponseEntity.ok(webservice);
     }
 
-    public String replaceWebserviceInstructions(WebService webservice){
-        if(getWebserviceById(webservice.getId()) == null){
-            return "Failure to find id";
-        }
-        repository.deleteById(webservice.getId());
+    public ResponseEntity<WebService> replaceWebserviceInstructions(WebService webservice){
+    	HttpStatus webServiceExists = getWebserviceById(webservice.getId()).getStatusCode();
+    	if (webServiceExists == HttpStatus.NOT_FOUND) {
+			  return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		  }
         repository.save(webservice);
-        return "Data replaced successfully";
+        return ResponseEntity.ok(webservice);
     }
 }
