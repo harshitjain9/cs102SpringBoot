@@ -34,6 +34,12 @@ public class AlertService {
 		return ResponseEntity.ok(alerts);
 	}
 	
+	public List<Alert> getAlertsAccordingToVesselIdNonResponseEntity(String abbrVslM, String inVoyN) {
+		List<Alert> alerts = repository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+		return alerts;
+	}
+	
+	
 	//POST
 	public ResponseEntity<Alert> saveAlertInDB(Alert alert) {
 		repository.save(alert);

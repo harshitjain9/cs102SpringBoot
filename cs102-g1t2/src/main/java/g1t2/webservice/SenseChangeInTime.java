@@ -36,12 +36,20 @@ public class SenseChangeInTime {
     public boolean hasBerthOrDepartTimeChanged(String oldBthgDt, String newBthgDt, String oldUnbthgDt, String newUnbthgDt) {
         return hasTimeChanged(oldBthgDt,newBthgDt) || hasTimeChanged(oldUnbthgDt, newUnbthgDt);
     }
+    
+    
+    public String getFirstBthgDt(ResponseEntity<Vessel> newVessel) {
+        return vesselService.getFirstBthgDt(newVessel);
+    }
 
 
 
-
-    public ResponseEntity<List<Alert>> getSubscriptionListForVessel (Vessel newVessel){
+    public ResponseEntity<List<Alert>> getAlertListForVessel (Vessel newVessel){
         return alertService.getAlertsAccordingToVesselId(newVessel.getAbbrVslM(), newVessel.getInVoyN());
+    }
+    
+    public List<Alert> getAlertListVessel(Vessel newVessel){
+        return alertService.getAlertsAccordingToVesselIdNonResponseEntity(newVessel.getAbbrVslM(), newVessel.getInVoyN());
     }
 
     public void emailAllSubscribers(String vesselName, List<Alert> subList, String oldBthgDt, String newBthgDt, String
@@ -60,35 +68,37 @@ public class SenseChangeInTime {
     }
 
 
-    public void toEmailIfBerthOrDepartTimeChange(Vessel newVessel, Vessel existingVessel){
+    public void toEmailIfBerthOrDepartTimeChange(Vessel newVessel, ResponseEntity<Vessel> existingVessel){
         System.out.println("retrieved existing vessel");
         if (existingVessel != null) {
             String vesselName = newVessel.getAbbrVslM() + " " + newVessel.getInVoyN();
-            String oldBthgDt = existingVessel.getBthgDt();
-            String oldUnbthgDt = existingVessel.getUnbthgDt();
+            String oldBthgDt = vesselService.getBthgDt(existingVessel);
+            String oldUnbthgDt = vesselService.getUnbthgDt(existingVessel);
             String newBthgDt = newVessel.getBthgDt();
             String newUnbthgDt = newVessel.getUnbthgDt();
 
             if (hasBerthOrDepartTimeChanged(oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt)) {
-                emailAllSubscribers(vesselName, getSubscriptionListForVessel(newVessel), oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt);
+                emailAllSubscribers(vesselName, getAlertListVessel(newVessel), oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt);
             }
         }
-
+        		
     }
 
-    public void operationsUponBerthTimeChange(Vessel newVessel,Vessel existingVessel, List<Vessel> vesselList ) throws ParseException {
-//	        Vessel existingVessel = getExistingVessel(newVessel);
+    public void operationsUponBerthTimeChange(Vessel newVessel, ResponseEntity<Vessel> existingVessel, List<Vessel> vesselList ) throws ParseException {
+    	
         if (existingVessel != null) { //if it is an existing vessel
-            String firstBerthTimeString = existingVessel.getFirstBthgDt();
-            String oldBerthTimeString = existingVessel.getBthgDt();
+        	 String firstBerthTimeString = vesselService.getFirstBthgDt(existingVessel);
+        	 String oldBerthTimeString = vesselService.getBthgDt(existingVessel);
             String newBerthTimeString = newVessel.getBthgDt();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");//2021-03-27T11:41:00
 
             if (hasTimeChanged(oldBerthTimeString, newBerthTimeString)) {//if there is a change in berthing time
                 Date firstBerthTime = format.parse(firstBerthTimeString);
                 Date newBerthTime = format.parse(newBerthTimeString);
-                existingVessel.incrementCount(); //
-                newVessel.setCount(existingVessel.getCount());
+                
+                // Error thrown here - no property called increment count
+                vesselService.incrementCount(existingVessel); 
+                newVessel.setCount(vesselService.getCount(existingVessel));
                 long diff = Math.abs(firstBerthTime.getTime() - newBerthTime.getTime()); //Difference in old and new berthing time in milliseconds
                 long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(diff); //Difference in old and new berthing time in minutes
                 if (diffInMinutes >= 60) { // new berthing time changed by more than 60mins (huge change)
@@ -100,13 +110,14 @@ public class SenseChangeInTime {
                 }
 
             }else{
-                newVessel.setDisplayColor(existingVessel.getDisplayColor());
-                newVessel.setCount(existingVessel.getCount());
+                newVessel.setDisplayColor(vesselService.getDisplayColor(existingVessel));
+                newVessel.setCount(vesselService.getCount(existingVessel));
+                
             }
-            newVessel.setFirstBthgDt(existingVessel.getFirstBthgDt());
+            newVessel.setFirstBthgDt(vesselService.getFirstBthgDt(existingVessel));
             vesselList.add(newVessel);
 
-        } else {//if it is a new vessel
+        } else {//if vessel returned is new
             newVessel.setFirstBthgDt(newVessel.getBthgDt());
             newVessel.setDisplayColor("white");
             newVessel.setCount(0);

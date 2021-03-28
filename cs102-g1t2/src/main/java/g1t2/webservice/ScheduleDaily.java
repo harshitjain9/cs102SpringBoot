@@ -14,36 +14,38 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import com.google.gson.Gson;
 
 import g1t2.entities.Vessel;
-import g1t2.repositories.WebServiceRepository;
-import g1t2.service.EmailServerService;
 import g1t2.service.VesselService;
-import g1t2.service.WebServiceService;
 
-
+@Configuration
+@EnableScheduling
+@ConditionalOnProperty(name = "scheduling.enabled", matchIfMissing = true)
 public class ScheduleDaily {
 	
 	@Autowired
     private VesselService serviceVessel;
 
-    @Autowired
-    private WebServiceService service;
+	@Autowired
+    private SenseChangeInTime senseChangeInTimeService;
+    
+//    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Autowired
-    private EmailServerService emailServerService;
 
-    @Autowired
-    private WebServiceRepository repository;
 
-//    @Autowired
-//    private DetectTimeChangeAndEmail timeDetectionService;
   public void replaceDataForDaily(List<Vessel> vesselList){
-      //some code
+	  serviceVessel.addVesselsList(vesselList);
+	  
   }
-
+  // runs every once everyday.
+  @Scheduled(fixedRate = 86400000L) // 1 day in milliseconds
   public void run() {
       String apiKey = "8f765e3bf8534243bceeb5341a78f5f2";
       LocalDate now = LocalDate.now();
@@ -64,9 +66,9 @@ public class ScheduleDaily {
           for (int i = 0, size = jsonArray.length(); i < size; i++){
               JSONObject objectInArray = jsonArray.getJSONObject(i);
               Vessel newVessel= gson.fromJson(objectInArray.toString(), Vessel.class);
-              //Vessel existingVessel = timeDetectionService.getExistingVessel(newVessel);
-              //timeDetectionService.operationsUponBerthTimeChange(newVessel,existingVessel, vesselList);
-              //timeDetectionService.toEmailIfBerthOrDepartTimeChange(newVessel,existingVessel);
+              ResponseEntity<Vessel> existingVessel = senseChangeInTimeService.getExistingVessel(newVessel);
+              senseChangeInTimeService.operationsUponBerthTimeChange(newVessel,existingVessel, vesselList);
+              senseChangeInTimeService.toEmailIfBerthOrDepartTimeChange(newVessel,existingVessel);
           }
 //          System.out.println(vesselList.toString());
           replaceDataForDaily(vesselList);
