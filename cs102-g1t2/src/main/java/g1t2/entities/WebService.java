@@ -14,6 +14,10 @@ public class WebService {
     private String apiKey;
     private String dailyUpdate = "* * * ? * *";
     private int currentDayUpdate;
+    
+    public WebService() {
+    	
+    }
 
     public WebService(int id, String encodedString, String dailyUpdate, int currentDayUpdate) {
     	this.id = id;

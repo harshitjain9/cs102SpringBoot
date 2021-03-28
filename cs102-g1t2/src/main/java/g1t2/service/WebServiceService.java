@@ -18,8 +18,8 @@ public class WebServiceService {
       if (webServiceExists == HttpStatus.OK) {
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
       }
-      repository.save(webservice);
-      return ResponseEntity.status(HttpStatus.CREATED).body(webservice);
+      WebService savedWebService = repository.save(webservice.hashingApiKey());
+      return ResponseEntity.status(HttpStatus.CREATED).body(savedWebService);
 
     }
 
@@ -36,7 +36,7 @@ public class WebServiceService {
     	if (webServiceExists == HttpStatus.NOT_FOUND) {
 			  return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		  }
-        repository.save(webservice);
-        return ResponseEntity.ok(webservice);
+    	WebService savedWebService = repository.save(webservice.hashingApiKey());
+        return ResponseEntity.ok(savedWebService);
     }
 }

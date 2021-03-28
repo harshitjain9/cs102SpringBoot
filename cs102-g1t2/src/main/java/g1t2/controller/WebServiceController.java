@@ -3,8 +3,11 @@ package g1t2.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import g1t2.entities.WebService;
@@ -17,17 +20,17 @@ public class WebServiceController {
 	private WebServiceService webServiceService;
 	
 	
-	@RequestMapping("/getById/{id}")
+	@RequestMapping("/webservice/{id}")
 	public ResponseEntity<WebService> getWebserviceById(@PathVariable int id) {
 		return webServiceService.getWebserviceById(id);
 	}
 		
-	@RequestMapping("/addWebservice/")
+	@PostMapping("/webservice")
     public ResponseEntity<WebService> saveWebserviceController(@RequestBody WebService webservice){
-        return webServiceService.saveWebservice(webservice.hashingApiKey());
+        return webServiceService.saveWebservice(webservice);
     }
 	
-	@RequestMapping("/updateWebservice/")
+	@PutMapping("/webservice")
 	public ResponseEntity<WebService> replaceWebserviceInstructions(@RequestBody WebService webservice) {
 		return webServiceService.replaceWebserviceInstructions(webservice);
 	}
