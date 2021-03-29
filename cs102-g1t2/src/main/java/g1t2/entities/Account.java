@@ -2,8 +2,10 @@ package g1t2.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "ACCOUNT_TBL")
 public class Account {
 	
 	@Id
