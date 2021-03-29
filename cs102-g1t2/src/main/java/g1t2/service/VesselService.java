@@ -37,38 +37,10 @@ public class VesselService {
 		return ResponseEntity.ok(vessel);
 	}
 	
-	// for SenseChangeInTime.java
-	public String getFirstBthgDt(ResponseEntity<Vessel> vessel) {
-		return vesselRepository.getFirstBthgDt(vessel);
+	public Vessel findByAbbrVslMAndInVoyNNonResponseEntity(String abbrVslM, String inVoyN) {
+		return vesselRepository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
 	}
-	
-	public String getBthgDt(ResponseEntity<Vessel> vessel) {
-		return vesselRepository.getBthgDt(vessel);
-	}
-	
-	public String getDisplayColor(ResponseEntity<Vessel> vessel) {
-		return vesselRepository.getDisplayColor(vessel);
-	}
-	
-	public int getCount(ResponseEntity<Vessel> vessel) {
-		return vesselRepository.getCount(vessel);
-	}
-	
-	public String getUnbthgDt(ResponseEntity<Vessel> vessel) {
-		return vesselRepository.getUnbthgDt(vessel);
-	}
-	
-	// save count+1 ? 
-	// error thrown here: no property called increment count
-	public void incrementCount(ResponseEntity<Vessel> vessel) {
-//        int current_count = vesselRepository.getCount(vessel);
-//        current_count += 1;
-        vesselRepository.incrementCount(vessel);
-    }
-	
-	
-	//end
- 
+	 
 	public ResponseEntity<Vessel> addVessel(Vessel vessel) {
 		HttpStatus vesselExists = findByAbbrVslMAndInVoyN(vessel.getAbbrVslM(), vessel.getInVoyN()).getStatusCode();
 		if (vesselExists == HttpStatus.OK) {

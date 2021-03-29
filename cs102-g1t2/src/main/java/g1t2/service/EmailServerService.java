@@ -31,13 +31,17 @@ public class EmailServerService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedEmailServer);
 	}
 
-    public ResponseEntity<Optional<EmailServer>> getEmailServer(String id) {
-    	Optional<EmailServer> emailServer = repository.findById(id);
-        if (emailServer.isEmpty()) {
+    public ResponseEntity<EmailServer> getEmailServer(int id) {
+    	EmailServer emailServer = repository.findById(id).orElse(null);
+        if (emailServer == null) {
         	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(emailServer);
         
+    }
+    
+    public EmailServer getEmailServerNonResponseEntity(int id) {
+    	return repository.findById(id).orElse(null);
     }
 
     public ResponseEntity<EmailServer> updateEmailServer(EmailServer emailServer){
@@ -45,13 +49,17 @@ public class EmailServerService {
 		EmailServer savedEmailServer = repository.save(emailServer);
 		return ResponseEntity.ok(savedEmailServer);
     }
-    public void sendEmail(String toEmail, String subject, String message) {
+    
+    public void sendEmail(String subject, String message, String toEmail) {
 
         var mailMessage = new SimpleMailMessage();
+        String fromEmail = getEmailServerNonResponseEntity(1).getSenderEmail();
         
+        mailMessage.setFrom(fromEmail);
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
+        
 
         javaMailSender.send(mailMessage);
     }

@@ -18,11 +18,11 @@ public interface VesselRepository extends JpaRepository<Vessel, VesselComposite>
     void deleteByAbbrVslMAndOutVoyN(String abbrVslM, String outVoyN);
     
     // for SenseChangeInTime.java
-    String getFirstBthgDt(ResponseEntity<Vessel> vessel);
-    String getBthgDt(ResponseEntity<Vessel> vessel);
-    int getCount(ResponseEntity<Vessel> vessel);
-    void incrementCount(ResponseEntity<Vessel> vessel);
-	String getDisplayColor(ResponseEntity<Vessel> vessel);
-	String getUnbthgDt(ResponseEntity<Vessel> vessel);
+//    String getFirstBthgDt(ResponseEntity<Vessel> vessel);
+//    String getBthgDt(ResponseEntity<Vessel> vessel);
+//    int getCount(ResponseEntity<Vessel> vessel);
+//    void incrementCount(ResponseEntity<Vessel> vessel);
+//	String getDisplayColor(ResponseEntity<Vessel> vessel);
+//	String getUnbthgDt(ResponseEntity<Vessel> vessel);
 
 }

@@ -45,33 +45,33 @@ public class VesselController {
 		return vesselService.deleteVessel(abbrVslM, inVoyN, outVoyN);
 	}
 	// For SenseChangeInTime.java
-	@RequestMapping("/vessels/{firstBthgDt}")
-	public String getFirstBthgDt(@PathVariable ResponseEntity<Vessel> vessel) {
-		return vesselService.getFirstBthgDt(vessel);
-	}
-	
-	@RequestMapping("/vessels/{BthgDt}")
-	public String getBthgDt(@PathVariable ResponseEntity<Vessel> vessel) {
-		return vesselService.getBthgDt(vessel);
-	}
-	
-	@RequestMapping("/vessels/{Count}")
-	public int getCount(@PathVariable ResponseEntity<Vessel> vessel) {
-		return vesselService.getCount(vessel);
-	}
-	@RequestMapping("/vessels/{DisplayColor}")
-	public String getDisplayColor(@PathVariable ResponseEntity<Vessel> vessel) {
-		return vesselService.getDisplayColor(vessel);
-	}
-	
-	@RequestMapping("/vessels/{UnbthgDt}")
-	public String getUnbthgDt(@PathVariable ResponseEntity<Vessel> vessel) {
-		return vesselService.getUnbthgDt(vessel);
-	}
-	
-	// increment count works as a setter for count that does count +=1
-	@RequestMapping(method=RequestMethod.PUT, value="/vessels/{incrementCount}")
-	public void incrementCount(@PathVariable ResponseEntity<Vessel> vessel) {
-		vesselService.incrementCount(vessel);
-	}
+//	@RequestMapping("/vessels/{firstBthgDt}")
+//	public String getFirstBthgDt(@PathVariable ResponseEntity<Vessel> vessel) {
+//		return vesselService.getFirstBthgDt(vessel);
+//	}
+//	
+//	@RequestMapping("/vessels/{BthgDt}")
+//	public String getBthgDt(@PathVariable ResponseEntity<Vessel> vessel) {
+//		return vesselService.getBthgDt(vessel);
+//	}
+//	
+//	@RequestMapping("/vessels/{Count}")
+//	public int getCount(@PathVariable ResponseEntity<Vessel> vessel) {
+//		return vesselService.getCount(vessel);
+//	}
+//	@RequestMapping("/vessels/{DisplayColor}")
+//	public String getDisplayColor(@PathVariable ResponseEntity<Vessel> vessel) {
+//		return vesselService.getDisplayColor(vessel);
+//	}
+//	
+//	@RequestMapping("/vessels/{UnbthgDt}")
+//	public String getUnbthgDt(@PathVariable ResponseEntity<Vessel> vessel) {
+//		return vesselService.getUnbthgDt(vessel);
+//	}
+//	
+//	// increment count works as a setter for count that does count +=1
+//	@RequestMapping(method=RequestMethod.PUT, value="/vessels/{incrementCount}")
+//	public void incrementCount(@PathVariable ResponseEntity<Vessel> vessel) {
+//		vesselService.incrementCount(vessel);
+//	}
 }
