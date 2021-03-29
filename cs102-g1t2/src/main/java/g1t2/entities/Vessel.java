@@ -109,8 +109,8 @@ public class Vessel {
 	public String getFirstBthgDt() {
 		return firstBthgDt;
 	}
-	public void setCount(int changeCount) {
-        this.count = changeCount;
+	public void setCount(int count) {
+        this.count = count;
     }
 
     public void setFirstBthgDt(String firstBthgDt) {

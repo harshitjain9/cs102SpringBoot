@@ -30,7 +30,7 @@ public class EmailServerController {
     }
 
     @GetMapping("/getEmailServer/{id}")
-    public ResponseEntity<Optional<EmailServer>> getEmailServer(@PathVariable String id) {
+    public ResponseEntity<EmailServer> getEmailServer(@PathVariable int id) {
         return service.getEmailServer(id);
     }
 }

@@ -30,6 +30,10 @@ public class WebServiceService {
     	}
     	return ResponseEntity.ok(webservice);
     }
+    
+    public WebService getWebserviceByIdNonResponseEntity(int id) {
+    	return repository.findById(id);
+    }
 
     public ResponseEntity<WebService> replaceWebserviceInstructions(WebService webservice){
     	HttpStatus webServiceExists = getWebserviceById(webservice.getId()).getStatusCode();

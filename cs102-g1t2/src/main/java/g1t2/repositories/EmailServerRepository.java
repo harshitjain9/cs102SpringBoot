@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import g1t2.entities.EmailServer;
 
 @Repository
-public interface EmailServerRepository extends JpaRepository <EmailServer, String> {
-	void deleteById(String id);
+public interface EmailServerRepository extends JpaRepository <EmailServer, Integer> {
+	void deleteById(int id);
 }

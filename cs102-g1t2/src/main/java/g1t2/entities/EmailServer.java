@@ -7,24 +7,24 @@ import javax.persistence.Id;
 @Entity
 public class EmailServer {
 	@Id
-	private String id;
+	private int id;
 	private String server;
 	private String senderEmail;
 	
 	public EmailServer() {
 		super();
 	}
-	public EmailServer(String id, String server, String senderEmail) {
+	public EmailServer(int id, String server, String senderEmail) {
 		super();
 		this.id = id;
 		this.server = server;
 		this.senderEmail = senderEmail;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getServer() {
