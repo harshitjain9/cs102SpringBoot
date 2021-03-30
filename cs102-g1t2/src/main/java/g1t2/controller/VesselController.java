@@ -1,6 +1,7 @@
 package g1t2.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,13 @@ public class VesselController {
 	public ResponseEntity<Void> deleteVessel(@PathVariable String abbrVslM, @PathVariable String inVoyN, @PathVariable String outVoyN) {
 		return vesselService.deleteVessel(abbrVslM, inVoyN, outVoyN);
 	}
+	
+	@RequestMapping(method=RequestMethod.PATCH, value="/vessels/{abbrVslM}/{inVoyN}")
+	public Vessel updatePartialVessel(@PathVariable String abbrVslM, @PathVariable String inVoyN, @RequestBody Map<Object, Object> fields) {
+		return vesselService.updateVesselPartial(abbrVslM, inVoyN, fields);
+	}
+	
+	
 	// For SenseChangeInTime.java
 //	@RequestMapping("/vessels/{firstBthgDt}")
 //	public String getFirstBthgDt(@PathVariable ResponseEntity<Vessel> vessel) {

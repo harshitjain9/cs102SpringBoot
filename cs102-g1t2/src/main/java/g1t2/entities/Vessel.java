@@ -19,11 +19,25 @@ public class Vessel {
 	private String fullVslM;
 	private String fullInVoyN;
 	private String outVoyN;
+	private String shiftSeqN;
 	private String bthgDt;
 	private String unbthgDt;
 	private String berthN;
 	private String status;
 	
+	private String AVG_SPEED;
+	private String DISTANCE_TO_GO;
+	private String IS_PATCHING_ACTIVATED;
+	private String MAX_SPEED;
+	private String PATCHING_PREDICTED_BTR;
+	private String PREDICTED_BTR;
+	private String VESSEL_NAME;
+	private String VOYAGE_CODE_INBOUND;
+	private String VSL_VOY;
+	
+	
+	
+
 	// count refers to the number of times the timing has been updated
 	// used for SenseChangeInTime.java
 	private int count;
@@ -33,16 +47,31 @@ public class Vessel {
 	public Vessel() {
 		
 	}
-	public Vessel(String fullVslM, String abbrVslM, String inVoyN, String fullInVoyN, String outVoyN, String btrDt, String unbthgDt, String berthN, String status) {
-		this.fullVslM = fullVslM;
+
+	public Vessel(String abbrVslM, String inVoyN, String fullVslM, String fullInVoyN, String outVoyN, String shiftSeqN,
+			String bthgDt, String unbthgDt, String berthN, String status, String aVG_SPEED, String dISTANCE_TO_GO,
+			String iS_PATCHING_ACTIVATED, String mAX_SPEED, String pATCHING_PREDICTED_BTR, String pREDICTED_BTR,
+			String vESSEL_NAME, String vOYAGE_CODE_INBOUND, String vSL_VOY) {
+		super();
 		this.abbrVslM = abbrVslM;
 		this.inVoyN = inVoyN;
+		this.fullVslM = fullVslM;
 		this.fullInVoyN = fullInVoyN;
 		this.outVoyN = outVoyN;
-		this.bthgDt = btrDt;
+		this.shiftSeqN = shiftSeqN;
+		this.bthgDt = bthgDt;
 		this.unbthgDt = unbthgDt;
 		this.berthN = berthN;
 		this.status = status;
+		AVG_SPEED = aVG_SPEED;
+		DISTANCE_TO_GO = dISTANCE_TO_GO;
+		IS_PATCHING_ACTIVATED = iS_PATCHING_ACTIVATED;
+		MAX_SPEED = mAX_SPEED;
+		PATCHING_PREDICTED_BTR = pATCHING_PREDICTED_BTR;
+		PREDICTED_BTR = pREDICTED_BTR;
+		VESSEL_NAME = vESSEL_NAME;
+		VOYAGE_CODE_INBOUND = vOYAGE_CODE_INBOUND;
+		VSL_VOY = vSL_VOY;
 	}
 	
 	public String getFullVslM() {
@@ -99,7 +128,66 @@ public class Vessel {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+	public String getShiftSeqN() {
+		return shiftSeqN;
+	}
+	public void setShiftSeqN(String shiftSeqN) {
+		this.shiftSeqN = shiftSeqN;
+	}
+	public String getAVG_SPEED() {
+		return AVG_SPEED;
+	}
+	public void setAVG_SPEED(String aVG_SPEED) {
+		AVG_SPEED = aVG_SPEED;
+	}
+	public String getDISTANCE_TO_GO() {
+		return DISTANCE_TO_GO;
+	}
+	public void setDISTANCE_TO_GO(String dISTANCE_TO_GO) {
+		DISTANCE_TO_GO = dISTANCE_TO_GO;
+	}
+	public String getIS_PATCHING_ACTIVATED() {
+		return IS_PATCHING_ACTIVATED;
+	}
+	public void setIS_PATCHING_ACTIVATED(String iS_PATCHING_ACTIVATED) {
+		IS_PATCHING_ACTIVATED = iS_PATCHING_ACTIVATED;
+	}
+	public String getMAX_SPEED() {
+		return MAX_SPEED;
+	}
+	public void setMAX_SPEED(String mAX_SPEED) {
+		MAX_SPEED = mAX_SPEED;
+	}
+	public String getPATCHING_PREDICTED_BTR() {
+		return PATCHING_PREDICTED_BTR;
+	}
+	public void setPATCHING_PREDICTED_BTR(String pATCHING_PREDICTED_BTR) {
+		PATCHING_PREDICTED_BTR = pATCHING_PREDICTED_BTR;
+	}
+	public String getPREDICTED_BTR() {
+		return PREDICTED_BTR;
+	}
+	public void setPREDICTED_BTR(String pREDICTED_BTR) {
+		PREDICTED_BTR = pREDICTED_BTR;
+	}
+	public String getVESSEL_NAME() {
+		return VESSEL_NAME;
+	}
+	public void setVESSEL_NAME(String vESSEL_NAME) {
+		VESSEL_NAME = vESSEL_NAME;
+	}
+	public String getVOYAGE_CODE_INBOUND() {
+		return VOYAGE_CODE_INBOUND;
+	}
+	public void setVOYAGE_CODE_INBOUND(String vOYAGE_CODE_INBOUND) {
+		VOYAGE_CODE_INBOUND = vOYAGE_CODE_INBOUND;
+	}
+	public String getVSL_VOY() {
+		return VSL_VOY;
+	}
+	public void setVSL_VOY(String vSL_VOY) {
+		VSL_VOY = vSL_VOY;
+	}
 	
 	// below getters and setters are for SenseChangeInTime.java
 	
@@ -120,7 +208,6 @@ public class Vessel {
     public void incrementCount() {
         this.count++;
     }
-	
     
     public String getDisplayColor() {
 		return displayColor;

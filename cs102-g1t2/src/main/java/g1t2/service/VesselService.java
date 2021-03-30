@@ -2,11 +2,14 @@ package g1t2.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.ReflectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import java.lang.reflect.Field;
 
 import g1t2.entities.Vessel;
 import g1t2.repositories.VesselRepository;
@@ -21,6 +24,12 @@ public class VesselService {
 		List<Vessel> vessels = new ArrayList<>();
 		vesselRepository.findAll().forEach(vessels::add);
 		return ResponseEntity.ok(vessels);
+	}
+	
+	public List<Vessel> getAllVesselsNonResponseEntity() {
+		List<Vessel> vessels = new ArrayList<>();
+		vesselRepository.findAll().forEach(vessels::add);
+		return vessels;
 	}
 	
 	public ResponseEntity<List<Vessel>> addVesselsList(List<Vessel> vesselList) {
@@ -57,6 +66,23 @@ public class VesselService {
 		}
 		vesselRepository.save(vessel);
 		return ResponseEntity.ok(vessel);
+	}
+	
+	public Vessel updateVesselPartial(String abbrVslM, String inVoyN, Map<Object, Object> fields) {
+		Vessel vessel = vesselRepository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+		fields.forEach((k, v) -> {
+			try {
+			Field field = ReflectionUtils.findRequiredField(Vessel.class, (String) k);
+			field.setAccessible(true);
+			ReflectionUtils.setField(field, vessel, String.valueOf(v));
+			
+			} catch (IllegalArgumentException e) {
+				
+			}
+		});
+		Vessel updatedVessel = vesselRepository.save(vessel);
+		return updatedVessel;
+		
 	}
  
 	public ResponseEntity<Void> deleteVessel(String abbrVslM, String inVoyN, String outVoyN) {

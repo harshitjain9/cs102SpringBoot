@@ -10,7 +10,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @SpringBootApplication
 @EnableScheduling
 public class Cs102G1t2Application {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Cs102G1t2Application.class, args);
 	}
@@ -21,5 +21,5 @@ public class Cs102G1t2Application {
 		scheduler.setPoolSize(10);
 		return scheduler;
 	}
-
+	
 }
