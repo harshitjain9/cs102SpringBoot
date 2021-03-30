@@ -129,9 +129,9 @@ public class ScheduleDaily implements Runnable{
                 timeDetectionService.operationsUponBerthTimeChange(newVessel,existingVessel, vesselList);
                 timeDetectionService.toEmailIfBerthOrDepartTimeChange(newVessel,existingVessel);
             }
-            System.out.println(vesselList);
-            c++;
-            System.out.println(c);
+//            System.out.println(vesselList);
+//            c++;
+//            System.out.println(c);
             replaceDataForDaily(vesselList);
 
           }
