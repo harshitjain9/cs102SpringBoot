@@ -160,6 +160,6 @@ public class ScheduleCurrentDay implements Runnable{
   
   @PostConstruct
   public void initializeScheduler() {
-	  this.reSchedule(getCurrentDayRate(1));
+//	  this.reSchedule(getCurrentDayRate(1));
   }
 }
