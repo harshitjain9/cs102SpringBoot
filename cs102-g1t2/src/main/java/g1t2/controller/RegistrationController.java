@@ -22,28 +22,21 @@ public class RegistrationController {
 	@Autowired
 	private RegistrationService RService;
 	
-	//GET
-	//@RequestMapping("/getAllEmailSuffix")
+
 	@GetMapping("/emailSuffix")
 	public ResponseEntity<List<Registration>> getAllEmailSuffix() {
 		return RService.getAllEmailSuffix();
 	}
 	
-	//POST
-	//	@RequestMapping(method=RequestMethod.POST, value="/createNewEmailSuffix")
 	@PostMapping("/emailSuffix")
 	public ResponseEntity<Registration> createNewEmailSuffix(@RequestBody Registration registration) {
 		return RService.saveEmailSuffixInDB(registration);
 	}
-	
-	
-	//DELETE
+
 	@DeleteMapping("/emailSuffix/{emailSuffix}")
     public ResponseEntity<Void> deleteEmailSuffix(@PathVariable String emailSuffix){
         return RService.deleteEmailSuffix(emailSuffix);
 	}
-	
-	
 	
 
 }

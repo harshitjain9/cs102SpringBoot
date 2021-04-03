@@ -30,13 +30,13 @@ public class AccountService {
 		return ResponseEntity.ok(account);
 	}
 	
-	public ResponseEntity<Account> addAccount(Account account) {
+	public Account addAccount(Account account) {
 		HttpStatus accountExists = getAccountByEmail(account.getEmail()).getStatusCode();
 		if (accountExists == HttpStatus.OK) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+			return null;
 		}
-		accountRepository.save(account);
-		return ResponseEntity.status(HttpStatus.CREATED).body(account);
+		Account savedAccount = accountRepository.save(account);
+		return savedAccount;
 	}
 	
 	public ResponseEntity<Account> updateAccount(Account account) {

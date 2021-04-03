@@ -1,6 +1,6 @@
 package g1t2.webservice;
 
-//import java.util.Base64;
+import java.util.Base64;
 //import java.util.Date;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -88,17 +88,25 @@ public class ScheduleDaily implements Runnable{
         }
         this.scheduledFuture = this.taskScheduler.schedule(this, new CronTrigger(cronExpressionStr));
     }
+    
+    public String getFirstApiServerName(int id){
+    	WebService webservice = service.getWebserviceByIdNonResponseEntity(id);
+        return webservice.getFirstApiServerName();
+    }
 
   // runs every once everyday.
 //  @Scheduled(fixedRate = 86400000L) // 1 day in milliseconds
   @Override
   public void run() {    
       try {
-          String apiKey = getApiKey(1);
+          String encodedString = getApiKey(1);
+          byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
+          String apiKey = new String(decodedBytes);
           LocalDate now = LocalDate.now();
 //          LocalDate start = now.plusDays(1);
           LocalDate end = now.plusDays(6);
-          URL url = new URL("https://api.portnet.com/vsspp/pp/bizfn/berthingSchedule/retrieveByBerthingDate/v1.2");
+          String serverName = getFirstApiServerName(1);
+          URL url = new URL(serverName);
           HttpURLConnection http = (HttpURLConnection) url.openConnection();
           http.setRequestMethod("POST");
           http.setDoOutput(true);
@@ -129,7 +137,7 @@ public class ScheduleDaily implements Runnable{
                 timeDetectionService.operationsUponBerthTimeChange(newVessel,existingVessel, vesselList);
                 timeDetectionService.toEmailIfBerthOrDepartTimeChange(newVessel,existingVessel);
             }
-//            System.out.println(vesselList);
+            System.out.println(vesselList);
 //            c++;
 //            System.out.println(c);
             replaceDataForDaily(vesselList);

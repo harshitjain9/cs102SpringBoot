@@ -1,6 +1,6 @@
 package g1t2.webservice;
 
-//import java.util.Base64;
+import java.util.Base64;
 //import java.util.Date;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -77,6 +77,12 @@ public class ScheduleCurrentDay implements Runnable{
     	WebService webservice = service.getWebserviceByIdNonResponseEntity(id);
         return webservice.getApiKey();
     }
+    
+    public String getSecondApiServerName(int id){
+    	WebService webservice = service.getWebserviceByIdNonResponseEntity(id);
+        return webservice.getSecondApiServerName();
+    }
+    
 
     public void replaceDataForDaily(List<Vessel> vesselList){
         serviceVessel.addVesselsList(vesselList);
@@ -115,11 +121,14 @@ public class ScheduleCurrentDay implements Runnable{
 		  
 		  try {
 	    	  String vslVoy = fullVsIM + inVoyN;
-	          String apiKey = getApiKey(1);
+	          String encodedString = getApiKey(1);
+	          byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
+	          String apiKey = new String(decodedBytes);
 	          LocalDate now = LocalDate.now();
 //	          LocalDate start = now.plusDays(1);
 	          LocalDate end = now.plusDays(6);
-	          URL url = new URL("https://api.portnet.com/extapi/vessels/predictedbtr/?vslvoy=" + vslVoy);
+	          String serverName = getSecondApiServerName(1);
+	          URL url = new URL(serverName+"/?vslvoy=" + vslVoy);
 	          HttpURLConnection http = (HttpURLConnection) url.openConnection();
 	          http.setRequestProperty("accept", "application/json");
 	          http.setRequestProperty("Apikey", apiKey);
