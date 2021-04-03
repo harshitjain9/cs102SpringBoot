@@ -144,13 +144,12 @@ public class ScheduleDaily implements Runnable{
       }
 
   }
-  
 
   
   @PostConstruct
   public void initializeScheduler() {
 //	  this.reSchedule(3);
-      this.reSchedule(getDailyFixedRate(1));
+//      this.reSchedule(getDailyFixedRate(1));
 //	  this.reSchedule("* * * ? * *");
   }
 }
