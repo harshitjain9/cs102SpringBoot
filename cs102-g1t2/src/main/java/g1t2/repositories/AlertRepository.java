@@ -12,7 +12,8 @@ import g1t2.entities.AlertComposite;
 public interface AlertRepository extends JpaRepository<Alert, AlertComposite> {
 	//INHERITING THEN OVERLOADING
 	List<Alert> findByEmail(String email);
-    List<Alert> findByAbbrVslMAndInVoyN(String abbrVslM, String inVoyN);
+    List<Alert> findByFullVslMAndInVoyN(String fullVslM, String inVoyN);
+    void deleteById(AlertComposite alertComposite);
 	
 }
 

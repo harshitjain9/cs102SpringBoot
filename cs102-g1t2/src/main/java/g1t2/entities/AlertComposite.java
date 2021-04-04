@@ -14,17 +14,27 @@ public class AlertComposite implements Serializable {
     private String email;
 
     @NotNull
-    private String abbrVslM;
+    private String fullVslM;
 
     @NotNull
     private String inVoyN;
+    
+    public AlertComposite() {
+    	
+    }
+    
+    public AlertComposite(String email, String fullVslM, String inVoyN) {
+    	this.email = email;
+    	this.fullVslM = fullVslM;
+    	this.inVoyN = inVoyN;
+    }
 
     public String getEmail() {
         return email;
     }
 
-    public String getAbbrVslM() {
-        return abbrVslM;
+    public String getFullVslM() {
+        return fullVslM;
     }
 
     public String getInVoyN() {
@@ -36,12 +46,12 @@ public class AlertComposite implements Serializable {
         if (!(o instanceof AlertComposite)) return false;
         AlertComposite that = (AlertComposite) o;
         return email.equals(that.email) &&
-                abbrVslM.equals(that.abbrVslM) &&
+        		fullVslM.equals(that.fullVslM) &&
                 inVoyN.equals(that.inVoyN);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, abbrVslM, inVoyN);
+        return Objects.hash(email, fullVslM, inVoyN);
     }
 }

@@ -29,13 +29,13 @@ public class AlertService {
 		return ResponseEntity.ok(alerts);
 	}
 	
-	public ResponseEntity<List<Alert>> getAlertsAccordingToVesselId(String abbrVslM, String inVoyN) {
-		List<Alert> alerts = repository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+	public ResponseEntity<List<Alert>> getAlertsAccordingToVesselId(String fullVslM, String inVoyN) {
+		List<Alert> alerts = repository.findByFullVslMAndInVoyN(fullVslM, inVoyN);
 		return ResponseEntity.ok(alerts);
 	}
 	
-	public List<Alert> getAlertsAccordingToVesselIdNonResponseEntity(String abbrVslM, String inVoyN) {
-		List<Alert> alerts = repository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+	public List<Alert> getAlertsAccordingToVesselIdNonResponseEntity(String fullVslM, String inVoyN) {
+		List<Alert> alerts = repository.findByFullVslMAndInVoyN(fullVslM, inVoyN);
 		return alerts;
 	}
 	
