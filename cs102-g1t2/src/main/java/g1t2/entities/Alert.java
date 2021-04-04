@@ -12,7 +12,7 @@ public class Alert {
 	@Id
 	private String email;
 	@Id
-	private String abbrVslM;
+	private String fullVslM;
 	@Id
 	private String inVoyN;
 	
@@ -23,9 +23,9 @@ public class Alert {
 		
 	}
 	
-	public Alert(String email, String abbrVslM, String inVoyN) {
+	public Alert(String email, String fullVslM, String inVoyN) {
 		this.email = email;
-		this.abbrVslM = abbrVslM;
+		this.fullVslM = fullVslM;
 		this.inVoyN = inVoyN;
 	}
 	
@@ -37,12 +37,12 @@ public class Alert {
 		this.email = email;
 	}
 	
-	public String getAbbrVslM() {
-		return abbrVslM;
+	public String getFullVslM() {
+		return fullVslM;
 	}
 	
-	public void setAbbrVslM(String abbrVslM) {
-		this.abbrVslM = abbrVslM;
+	public void setFullVslM(String fullVslM) {
+		this.fullVslM = fullVslM;
 	}
 	
 	public String getInVoyN() {

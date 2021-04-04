@@ -34,9 +34,9 @@ public class AlertController {
 		return alertService.getAlertsAccordingToUser(email);
 	}
 	
-	@GetMapping("/getAlertsAccordingToVesselId/{abbrVslM}/{inVoyN}")
-	public ResponseEntity<List<Alert>> getAlertsAccordingToVesselId(String abbrVslM, String inVoyN) {
-		return alertService.getAlertsAccordingToVesselId(abbrVslM, inVoyN);
+	@GetMapping("/getAlertsAccordingToVesselId/{fullVslM}/{inVoyN}")
+	public ResponseEntity<List<Alert>> getAlertsAccordingToVesselId(@PathVariable String fullVslM, @PathVariable String inVoyN) {
+		return alertService.getAlertsAccordingToVesselId(fullVslM, inVoyN);
 	}
 	
 	
@@ -54,7 +54,7 @@ public class AlertController {
 	
 	//DELETE
 	@DeleteMapping("/deleteAlert")
-    public ResponseEntity<Void> deleteSubscription(@RequestBody AlertComposite alertComposite){
+    public ResponseEntity<Void> deleteAlert(@RequestBody AlertComposite alertComposite){
         return alertService.deleteAlert(alertComposite);
     }
 }

@@ -38,20 +38,20 @@ public class VesselService {
 	}
 
  
-	public ResponseEntity<Vessel> findByAbbrVslMAndInVoyN(String abbrVslM, String inVoyN){
-		Vessel vessel = vesselRepository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+	public ResponseEntity<Vessel> findByFullVslMAndInVoyN(String fullVslM, String inVoyN){
+		Vessel vessel = vesselRepository.findByFullVslMAndInVoyN(fullVslM, inVoyN);
 		if (vessel == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		return ResponseEntity.ok(vessel);
 	}
 	
-	public Vessel findByAbbrVslMAndInVoyNNonResponseEntity(String abbrVslM, String inVoyN) {
-		return vesselRepository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+	public Vessel findByFullVslMAndInVoyNNNonResponseEntity(String fullVslM, String inVoyN) {
+		return vesselRepository.findByFullVslMAndInVoyN(fullVslM, inVoyN);
 	}
 	 
 	public ResponseEntity<Vessel> addVessel(Vessel vessel) {
-		HttpStatus vesselExists = findByAbbrVslMAndInVoyN(vessel.getAbbrVslM(), vessel.getInVoyN()).getStatusCode();
+		HttpStatus vesselExists = findByFullVslMAndInVoyN(vessel.getFullVslM(), vessel.getInVoyN()).getStatusCode();
 		if (vesselExists == HttpStatus.OK) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
@@ -59,8 +59,8 @@ public class VesselService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(vessel);
 	}
  
-	public ResponseEntity<Vessel> updateVessel(String abbrVslM, String inVoyN, String outVoyN, Vessel vessel) {
-		HttpStatus vesselExists = findByAbbrVslMAndInVoyN(vessel.getAbbrVslM(), vessel.getInVoyN()).getStatusCode();
+	public ResponseEntity<Vessel> updateVessel(String fullVslM, String inVoyN, String outVoyN, Vessel vessel) {
+		HttpStatus vesselExists = findByFullVslMAndInVoyN(vessel.getFullVslM(), vessel.getInVoyN()).getStatusCode();
 		if (vesselExists == HttpStatus.NOT_FOUND) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
@@ -68,8 +68,8 @@ public class VesselService {
 		return ResponseEntity.ok(vessel);
 	}
 	
-	public Vessel updateVesselPartial(String abbrVslM, String inVoyN, Map<Object, Object> fields) {
-		Vessel vessel = vesselRepository.findByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+	public Vessel updateVesselPartial(String fullVslM, String inVoyN, Map<Object, Object> fields) {
+		Vessel vessel = vesselRepository.findByFullVslMAndInVoyN(fullVslM, inVoyN);
 		fields.forEach((k, v) -> {
 			try {
 			Field field = ReflectionUtils.findRequiredField(Vessel.class, (String) k);
@@ -85,17 +85,17 @@ public class VesselService {
 		
 	}
  
-	public ResponseEntity<Void> deleteVessel(String abbrVslM, String inVoyN, String outVoyN) {
-		HttpStatus vesselExists = findByAbbrVslMAndInVoyN(abbrVslM, inVoyN).getStatusCode();
-		HttpStatus vesselExists2 = findByAbbrVslMAndInVoyN(abbrVslM, outVoyN).getStatusCode();
+	public ResponseEntity<Void> deleteVessel(String fullVslM, String inVoyN, String outVoyN) {
+		HttpStatus vesselExists = findByFullVslMAndInVoyN(fullVslM, inVoyN).getStatusCode();
+		HttpStatus vesselExists2 = findByFullVslMAndInVoyN(fullVslM, outVoyN).getStatusCode();
 		if (vesselExists == HttpStatus.NOT_FOUND) {
 			if (vesselExists2 == HttpStatus.NOT_FOUND) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 			}
-			vesselRepository.deleteByAbbrVslMAndOutVoyN(abbrVslM, outVoyN);
+			vesselRepository.deleteByFullVslMAndOutVoyN(fullVslM, outVoyN);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
-		vesselRepository.deleteByAbbrVslMAndInVoyN(abbrVslM, inVoyN);
+		vesselRepository.deleteByFullVslMAndInVoyN(fullVslM, inVoyN);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 

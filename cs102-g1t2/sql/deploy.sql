@@ -77,7 +77,9 @@ CREATE TABLE IF NOT EXISTS `WebService_table` (
 	`id` int NOT NULL,
     `apiKey` VARCHAR(255)  NOT NULL,
     `dailyUpdate` VARCHAR(255)  NOT NULL,
-    `currentDayUpdate` int NOT NULL
+    `currentDayUpdate` int NOT NULL,
+    `firstApiServerName` VARCHAR(255)  NOT NULL,
+    `secondApiServerName` VARCHAR(255)  NOT NULL
 );
 
 

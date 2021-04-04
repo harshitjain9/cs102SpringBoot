@@ -10,13 +10,15 @@ import javax.persistence.Table;
 @Table(name = "VESSEL_TBL")
 public class Vessel {
 	
-	@Id
-	private String abbrVslM;
+	
+	
 	
 	@Id
 	private String inVoyN;
-	
+	@Id
 	private String fullVslM;
+	
+	private String abbrVslM;
 	private String fullInVoyN;
 	private String outVoyN;
 	private String shiftSeqN;

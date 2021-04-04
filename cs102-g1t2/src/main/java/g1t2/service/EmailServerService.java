@@ -9,6 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import g1t2.entities.AlertComposite;
 import g1t2.entities.EmailServer;
 import g1t2.repositories.EmailServerRepository;
 
@@ -49,6 +50,8 @@ public class EmailServerService {
 		EmailServer savedEmailServer = repository.save(emailServer);
 		return ResponseEntity.ok(savedEmailServer);
     }
+    
+
     
     public void sendEmail(String subject, String message, String toEmail) {
 

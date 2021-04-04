@@ -3,6 +3,7 @@ package g1t2.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -65,8 +66,18 @@ public class AccountController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/accounts")
-	public ResponseEntity<Account> addAccount(@RequestBody Account account) {
-		return accountService.addAccount(account);
+	public ResponseEntity<?> addAccount(@RequestBody Account account) {
+		Account savedAccount = accountService.addAccount(account);
+		if (savedAccount != null) {
+			final MyUserDetails userDetails = (MyUserDetails) userDetailsService
+					.loadUserByUsername(savedAccount.getEmail());
+			final String jwt = jwtTokenUtil.generateToken(userDetails);
+			AuthenticationResponse response = new AuthenticationResponse(jwt, userDetails);
+			return ResponseEntity.ok(response);
+		} else {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
+		}
+		
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/accounts")

@@ -16,6 +16,10 @@ public class RegistrationService {
     private RegistrationRepository repository;
 
     public ResponseEntity<Registration> saveEmailSuffixInDB(Registration registration) {
+    	Registration duplicate = repository.findById(registration.getEmailSuffix()).orElse(null);
+    	if (duplicate != null) {
+    		return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    	}
     	Registration savedRegistration = repository.save(registration);
     	return ResponseEntity.status(HttpStatus.CREATED).body(savedRegistration);
     }

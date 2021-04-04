@@ -29,7 +29,7 @@ public class SenseChangeInTime {
     private AlertService alertService;
 
     public Vessel getExistingVessel(Vessel vessel) {
-        return vesselService.findByAbbrVslMAndInVoyNNonResponseEntity(vessel.getAbbrVslM(), vessel.getInVoyN());
+        return vesselService.findByFullVslMAndInVoyNNNonResponseEntity(vessel.getFullVslM(), vessel.getInVoyN());
     }
 
     public boolean hasTimeChanged(String oldTime, String newTime) {
@@ -48,7 +48,7 @@ public class SenseChangeInTime {
 
 
     public List<Alert> getAlertListForVessel(Vessel vessel){
-        return alertService.getAlertsAccordingToVesselIdNonResponseEntity(vessel.getAbbrVslM(), vessel.getInVoyN());
+        return alertService.getAlertsAccordingToVesselIdNonResponseEntity(vessel.getFullVslM(), vessel.getInVoyN());
     }
 
     public void emailAllSubscribers(String vesselName, List<Alert> subList, String oldBthgDt, String newBthgDt, String
@@ -69,7 +69,7 @@ public class SenseChangeInTime {
 
     public void toEmailIfBerthOrDepartTimeChange(Vessel newVessel, Vessel existingVessel){
         if (existingVessel != null) {
-            String vesselName = newVessel.getAbbrVslM() + " " + newVessel.getInVoyN();
+            String vesselName = newVessel.getFullVslM() + " " + newVessel.getInVoyN();
             String oldBthgDt = existingVessel.getBthgDt();
             String oldUnbthgDt = existingVessel.getUnbthgDt();
             String newBthgDt = newVessel.getBthgDt();

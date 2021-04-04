@@ -13,9 +13,9 @@ import g1t2.entities.VesselComposite;
 public interface VesselRepository extends JpaRepository<Vessel, VesselComposite>{
 	List<Vessel> findByBthgDtContaining(String date);
     String deleteByBthgDtContaining(String date);
-    Vessel findByAbbrVslMAndInVoyN(String abbrVslM, String inVoyN);
-    void deleteByAbbrVslMAndInVoyN(String abbrVslM, String inVoyN);
-    void deleteByAbbrVslMAndOutVoyN(String abbrVslM, String outVoyN);
+    Vessel findByFullVslMAndInVoyN(String fullVslM, String inVoyN);
+    void deleteByFullVslMAndInVoyN(String abbrVslM, String inVoyN);
+    void deleteByFullVslMAndOutVoyN(String abbrVslM, String outVoyN);
     
     // for SenseChangeInTime.java
 //    String getFirstBthgDt(ResponseEntity<Vessel> vessel);
