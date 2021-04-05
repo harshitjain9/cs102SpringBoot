@@ -50,36 +50,29 @@ public class SenseChangeInTime {
     public List<Alert> getAlertListForVessel(Vessel vessel){
         return alertService.getAlertsAccordingToVesselIdNonResponseEntity(vessel.getFullVslM(), vessel.getInVoyN());
     }
-
-    public void emailAllSubscribers(String vesselName, List<Alert> subList, String oldBthgDt, String newBthgDt, String
-    oldUnbthgDt, String newUnbthgDt){
-        for (Alert alert : subList) {
-            String toEmail =  alert.getEmail();
-            String subject = vesselName+": Berthing/Departure time change";
-            String message = "The berthing time has updated from "+oldBthgDt+" to "+newBthgDt
-                    +"\nThe departure time has updated from "+oldUnbthgDt+" to "+newUnbthgDt;
-            try{
+    
+    public void emailRegardingChangeInVessel(Vessel existingVessel, List<String> diffFields) {
+    	List<Alert> alertList = getAlertListForVessel(existingVessel);
+    	for (Alert alert: alertList) {
+    		
+    	      String vesselName = existingVessel.getFullVslM() + " " + existingVessel.getInVoyN();
+    	      String subject = "Deatails of vessel " + vesselName + " have changed";
+    	      
+    	      StringBuffer sb = new StringBuffer();
+    	      for(int i = 0; i < diffFields.size(); i++) {
+    	         sb.append(diffFields.get(i));
+    	      }
+    	      String message = sb.toString();
+    	      
+    	      String toEmail = alert.getEmail();
+    	      
+    		try{
                 emailServerService.sendEmail(subject, message, toEmail);
             }catch(Exception e){
-                System.out.println("Failed to send email");
+                System.out.println("Error in sending email");
             }
-        }
-    }
-
-
-    public void toEmailIfBerthOrDepartTimeChange(Vessel newVessel, Vessel existingVessel){
-        if (existingVessel != null) {
-            String vesselName = newVessel.getFullVslM() + " " + newVessel.getInVoyN();
-            String oldBthgDt = existingVessel.getBthgDt();
-            String oldUnbthgDt = existingVessel.getUnbthgDt();
-            String newBthgDt = newVessel.getBthgDt();
-            String newUnbthgDt = newVessel.getUnbthgDt();
-
-            if (hasBerthOrDepartTimeChanged(oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt)) {
-                emailAllSubscribers(vesselName, getAlertListForVessel(newVessel), oldBthgDt, newBthgDt, oldUnbthgDt, newUnbthgDt);
-            }
-        }
-        		
+    	}
+    	
     }
 
     public void operationsUponBerthTimeChange(Vessel newVessel,Vessel existingVessel, List<Vessel> vesselList ) throws ParseException {

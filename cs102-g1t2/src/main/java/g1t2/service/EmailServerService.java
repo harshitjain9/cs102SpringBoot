@@ -56,9 +56,8 @@ public class EmailServerService {
     public void sendEmail(String subject, String message, String toEmail) {
 
         var mailMessage = new SimpleMailMessage();
-        String fromEmail = getEmailServerNonResponseEntity(1).getSenderEmail();
-        
-        mailMessage.setFrom(fromEmail);
+//        String fromEmail = getEmailServerNonResponseEntity(1).getSenderEmail();
+ 
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);

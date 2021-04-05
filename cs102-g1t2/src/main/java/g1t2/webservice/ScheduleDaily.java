@@ -1,10 +1,10 @@
 package g1t2.webservice;
 
-import java.util.Base64;
 //import java.util.Date;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,25 +12,23 @@ import java.text.SimpleDateFormat;
 //import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 //import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledFuture;
 
 import javax.annotation.PostConstruct;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.TaskScheduler;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
-import com.sun.mail.iap.ProtocolException;
 
 import g1t2.entities.Vessel;
 import g1t2.entities.WebService;
@@ -64,6 +62,21 @@ public class ScheduleDaily implements Runnable{
 
     @Autowired
     private SenseChangeInTime timeDetectionService;
+    
+    private List<String> getDifference(Object s1, Object s2) throws IllegalAccessException {
+        List<String> values = new ArrayList<>();
+        for (Field field : s1.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            Object value1 = field.get(s1);
+            Object value2 = field.get(s2);
+            if (value1 != null && value2 != null) {
+                if (!Objects.equals(value1, value2)) {
+                    values.add(String.valueOf(field.getName()+": "+value1+" -> "+value2));
+                }
+            }
+        }
+        return values;
+    }
     
     public String getDailyFixedRate(int id){
         WebService webservice = service.getWebserviceByIdNonResponseEntity(id);
@@ -134,8 +147,24 @@ public class ScheduleDaily implements Runnable{
                 JSONObject objectInArray = jsonArray.getJSONObject(i);
                 Vessel newVessel= gson.fromJson(objectInArray.toString(), Vessel.class);
                 Vessel existingVessel = timeDetectionService.getExistingVessel(newVessel);
-                timeDetectionService.operationsUponBerthTimeChange(newVessel,existingVessel, vesselList);
-                timeDetectionService.toEmailIfBerthOrDepartTimeChange(newVessel,existingVessel);
+                
+                //flow:
+                //check if there is a difference in the new vessel and the old vessel
+                //if yes, update all the users who have subscribed to the vessel and update the vessel as well, save alert trigerred data in database
+                //if no, just continue.
+                //previous average speed:
+                //update the latest avgSpeeds.
+                
+                List<String> diffFields = getDifference(existingVessel, newVessel);
+                if (diffFields.size() != 0) {
+                	timeDetectionService.emailRegardingChangeInVessel(existingVessel,diffFields);
+                } else {
+                	
+                }
+               vesselList.add(newVessel);
+                
+//                timeDetectionService.operationsUponBerthTimeChange(newVessel,existingVessel, vesselList);
+//                timeDetectionService.toEmailIfBerthOrDepartTimeChange(newVessel,existingVessel);
             }
             System.out.println(vesselList);
 //            c++;

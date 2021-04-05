@@ -34,4 +34,16 @@ public class EmailServerController {
     public ResponseEntity<EmailServer> getEmailServer(@PathVariable int id) {
         return service.getEmailServer(id);
     }
+    
+    @GetMapping("/test")
+    public void test() {
+        String toEmail =  "harsheetjain@gmail.com";
+        String subject = "test subject";
+        String message = "test message";
+        try{
+        	service.sendEmail(subject, message, toEmail);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
