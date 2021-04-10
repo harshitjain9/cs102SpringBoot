@@ -82,4 +82,10 @@ CREATE TABLE IF NOT EXISTS `WebService_table` (
     `secondApiServerName` VARCHAR(255)  NOT NULL
 );
 
+insert into account_tbl values
+('test@gmail.com', 'test', 2000-01-01),
+('admin@psa.com', 'admin', 2000-01-01);
+
+insert into webservice_table values
+(1, '8f765e3bf8534243bceeb5341a78f5f2', '0 52 9 * * *', 504000, 'https://api.portnet.com/vsspp/pp/bizfn/berthingSchedule/retrieveByBerthingDate/v1.2', 'https://api.portnet.com/extapi/vessels/predictedbtr');
 
