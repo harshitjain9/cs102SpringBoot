@@ -12,7 +12,12 @@ import WebServicesSettings from "../../../frontend/src/components/WebServicesSet
 // import EmailSettings from "../../../frontend/src/components/EmailSettings/EmailSettings.jsx";
 import SingleVessel from "../../../frontend/src/components/SingleVessel/SingleVessel.jsx";
 
-export class App extends Component() {
+
+const React = require('react'); (1)
+const ReactDOM = require('react-dom'); (2)
+const client = require('./client'); (3)
+
+export class App extends React.Component() {
   // const React = require('react'); (1)
   // const ReactDOM = require('react-dom'); (2)
   // const client = require('./client'); (3)
