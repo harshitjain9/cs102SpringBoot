@@ -4,7 +4,7 @@
   "description": "Spring Boot React frontend app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --watch -d --output ./target/classes/static/built/bundle.js"
   },
   "author": "g1t7",
   "license": "MIT",
@@ -14,8 +14,8 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
-    "webpack": "^5.31.2",
-    "webpack-cli": "^4.6.0"
+    "webpack": "^5.14.2",
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "axios": "^0.21.1",
