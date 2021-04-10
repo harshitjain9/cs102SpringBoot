@@ -1,0 +1,59 @@
+.table-page-header{
+    background-image: url("/src/assets/landscape.png");
+    background-size: 100% 100%;
+    padding-bottom:2px;
+  }
+
+.table-page-heading {
+    /* color: #043c54; */
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    padding-top: 30px;
+    /* padding-bottom: 20px; */
+}
+
+table {
+  margin-top: 20px;
+  font-family: 'Trebuchet MS', sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+table td, table th {
+  border: 3px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even){background-color:lightgray;}
+
+table tr:nth-child(odd){background-color: rgb(236, 233, 233);}
+
+table tr:hover {
+   background-color: #BADFD7;
+   transform: scale(1.05);
+   cursor: pointer;
+}
+
+table th {
+  border: 3px solid #ddd;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: white;
+  color: black;
+}
+
+.search-bar-section {
+  padding-bottom: 20px;
+}
+
+.search-button {
+color: #fff;
+background-color: #669d9d;
+border-color: #17a2b8;
+}
+
+.search-button:hover {
+background-color: #17a2b8;
+}
