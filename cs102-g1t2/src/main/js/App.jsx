@@ -1,21 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Header from "../../../frontend/src/components/Header/Header.css";
-import Footer from "../../../frontend/src/components/Footer/Footer.css";
-import VesselSchedules from "../../../frontend/src/components/VesselSchedules/VesselSchedules.css";
-import AlertsConfigured from "../../../frontend/src/components/AlertsConfigured/AlertsConfigured.css";
-import AlertsTriggered from "../../../frontend/src/components/AlertsTriggered/AlertsTriggered.css";
-import Login from "../../../frontend/src/components/LoginPage/Login.css";
-import Registration from "../../../frontend/src/components/Registration/Registration.css";
-import ForgotPassword from "../../../frontend/src/components/ForgotPassword/ForgotPassword.css";
-import WebServicesSettings from "../../../frontend/src/components/WebServicesSettings/WebServicesSettings.css";
-// import EmailSettings from "../../../frontend/src/components/EmailSettings/EmailSettings.css";
-import SingleVessel from "../../../frontend/src/components/SingleVessel/SingleVessel.css";
+import Header from "../../../frontend/src/components/Header/Header.jsx";
+import Footer from "../../../frontend/src/components/Footer/Footer.jsx";
+import VesselSchedules from "../../../frontend/src/components/VesselSchedules/VesselSchedules.jsx";
+import AlertsConfigured from "../../../frontend/src/components/AlertsConfigured/AlertsConfigured.jsx";
+import AlertsTriggered from "../../../frontend/src/components/AlertsTriggered/AlertsTriggered.jsx";
+import Login from "../../../frontend/src/components/LoginPage/Login.jsx";
+import Registration from "../../../frontend/src/components/Registration/Registration.jsx";
+import ForgotPassword from "../../../frontend/src/components/ForgotPassword/ForgotPassword.jsx";
+import WebServicesSettings from "../../../frontend/src/components/WebServicesSettings/WebServicesSettings.jsx";
+// import EmailSettings from "../../../frontend/src/components/EmailSettings/EmailSettings.jsx";
+import SingleVessel from "../../../frontend/src/components/SingleVessel/SingleVessel.jsx";
 
 export class App extends Component() {
-  const React = require('react'); (1)
-  const ReactDOM = require('react-dom'); (2)
-  const client = require('./client'); (3)
+  // const React = require('react'); (1)
+  // const ReactDOM = require('react-dom'); (2)
+  // const client = require('./client'); (3)
   render() {
     return (
       <Router>

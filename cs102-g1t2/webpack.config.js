@@ -3,6 +3,10 @@ var path = require('path');
 module.exports = {
     entry: './src/main/js/App.jsx',
     devtool: 'sourcemaps',
+    devServer: {
+        inline: false,
+        contentBase: "./dist",
+    },
     cache: true,
     mode: 'development',
     output: {
@@ -25,7 +29,7 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'style-loader',
-                    'css-loader'
+                    /'css-loader'/ 
                 ]
             },
             {
