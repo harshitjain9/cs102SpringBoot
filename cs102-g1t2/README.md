@@ -27,7 +27,7 @@ This directory contains the deploy.sql script, and README.txt.
 8. To add to Alerts, click the `Add Alert` button and it will be accessible via the `Alerts Configured` button.
 9. There will also be a `Delete Alert` button where you can click on it if you no longer need to be informed about the changes in schedule of the vessel.
 10. To check if any realtime alerts that have been triggered, click on the `Alerts Triggered` button.
-11. Click on the buttons with dates on them i.e. `2021-04-11` to view the Vessel schedule according to the date selected.
+11. In the `Vessel Schedule` page, click on the buttons with dates on them i.e. `2021-04-11` to view the Vessel schedule according to the date selected.
 12. Click logout and it will lead you to login page.
 ## ----------------------------------Forget & Reset password--------------------------------
 10. Click forget password at login page.
