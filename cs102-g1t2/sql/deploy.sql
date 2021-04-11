@@ -5,10 +5,14 @@ DROP TABLE IF EXISTS `ACCOUNT_TBL`;
 CREATE TABLE IF NOT EXISTS `ACCOUNT_TBL` (
     `email` VARCHAR(255)  NOT NULL,
     `password` VARCHAR(255) NOT NULL,
-    `dateOfBirth` DateTime NOT NULL,
+    `dateOfBirth` VARCHAR(255) NOT NULL,
     PRIMARY KEY(`email`),
-    UNIQUE  (`username`)
+    UNIQUE  (`email`)
 );
+
+insert into account_tbl values
+('test@test.com', 'YWJj', '01-02-2000'),
+('admin@psa.com', 'YWJj', '01-02-2000');
 
 
 DROP TABLE IF EXISTS `VESSEL_TBL`;
@@ -82,10 +86,8 @@ CREATE TABLE IF NOT EXISTS `WebService_table` (
     `secondApiServerName` VARCHAR(255)  NOT NULL
 );
 
-insert into account_tbl values
-('test@gmail.com', 'test', '2000-01-01 00:00:00'),
-('admin@psa.com', 'admin', '2000-01-01 00:00:00');
+
 
 insert into webservice_table values
-(1, '8f765e3bf8534243bceeb5341a78f5f2', '0 52 9 * * *', 504000, 'https://api.portnet.com/vsspp/pp/bizfn/berthingSchedule/retrieveByBerthingDate/v1.2', 'https://api.portnet.com/extapi/vessels/predictedbtr');
+(1, 'OGY3NjVlM2JmODUzNDI0M2JjZWViNTM0MWE3OGY1ZjI=', '* 0 0 * * *', 43200000, 'https://api.portnet.com/vsspp/pp/bizfn/berthingSchedule/retrieveByBerthingDate/v1.2', 'https://api.portnet.com/extapi/vessels/predictedbtr');
 
