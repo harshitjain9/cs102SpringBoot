@@ -1,0 +1,19 @@
+.law-firm-main-container {
+    line-height: 2;
+    padding-top: 10px;
+    padding-bottom: 70px;
+    background-color: #F5F7F8;
+    color: #043c54;
+    position: relative;
+}
+
+.law-firm-main-container .custom-row {
+    padding: 20px 20px 20px 0;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+}
+
+.category {
+    font-weight: bold;
+}
