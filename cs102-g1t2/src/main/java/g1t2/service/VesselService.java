@@ -47,7 +47,8 @@ public class VesselService {
 	}
 	
 	public Vessel findByFullVslMAndInVoyNNNonResponseEntity(String fullVslM, String inVoyN) {
-		return vesselRepository.findByFullVslMAndInVoyN(fullVslM, inVoyN);
+		Vessel vessel = vesselRepository.findByFullVslMAndInVoyN(fullVslM, inVoyN);
+		return vessel;
 	}
 	 
 	public ResponseEntity<Vessel> addVessel(Vessel vessel) {
@@ -68,8 +69,31 @@ public class VesselService {
 		return ResponseEntity.ok(vessel);
 	}
 	
-	public Vessel updateVesselPartial(String fullVslM, String inVoyN, Map<Object, Object> fields) {
-		Vessel vessel = vesselRepository.findByFullVslMAndInVoyN(fullVslM, inVoyN);
+	public ResponseEntity<Vessel> updateVesselPartial(String fullVsLm, String inVoyN, Map<Object, Object> fields) {
+		Vessel vessel = vesselRepository.findByFullVslMAndInVoyN(fullVsLm, inVoyN);
+		if (vessel == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		fields.forEach((k, v) -> {
+			try {
+			Field field = ReflectionUtils.findRequiredField(Vessel.class, (String) k);
+			field.setAccessible(true);
+			ReflectionUtils.setField(field, vessel, String.valueOf(v));
+			
+			} catch (IllegalArgumentException e) {
+				
+			}
+		});
+		Vessel updatedVessel = vesselRepository.save(vessel);
+		return ResponseEntity.ok(updatedVessel);
+		
+	}
+	
+	public Vessel updateVesselPartial(Vessel givenVessel, Map<Object, Object> fields) {
+		Vessel vessel = vesselRepository.findByFullVslMAndInVoyN(givenVessel.getFullVslM(), givenVessel.getInVoyN());
+		if (vessel == null) {
+			return vesselRepository.save(givenVessel);
+		}
 		fields.forEach((k, v) -> {
 			try {
 			Field field = ReflectionUtils.findRequiredField(Vessel.class, (String) k);

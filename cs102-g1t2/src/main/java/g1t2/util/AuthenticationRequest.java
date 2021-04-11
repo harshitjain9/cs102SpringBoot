@@ -1,5 +1,7 @@
 package g1t2.util;
 
+import java.util.Base64;
+
 public class AuthenticationRequest {
 	
 	private String email;
@@ -27,6 +29,11 @@ public class AuthenticationRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getHashedPassword() {
+	String hashedPassword = Base64.getEncoder().encodeToString(this.getPassword().getBytes());
+    return hashedPassword;
+}
+	
 	
 	
 }

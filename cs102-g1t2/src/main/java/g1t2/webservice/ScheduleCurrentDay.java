@@ -11,8 +11,10 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 //import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 //import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledFuture;
@@ -31,6 +33,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.sun.mail.iap.ProtocolException;
@@ -97,20 +100,33 @@ public class ScheduleCurrentDay implements Runnable{
         }
         this.scheduledFuture = taskScheduler.scheduleAtFixedRate(this::run, interval);
     }
+    
+	public boolean dueArriveInThreeDays(String dateString) {
+		if (dateString == null || dateString.equals("")) {
+			return false;
+		}
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss", Locale.ENGLISH);
+		LocalDate givenDate = LocalDate.parse(dateString, inputFormatter);
+		return givenDate.isAfter(LocalDate.now()) && givenDate.isBefore(LocalDate.now().plusDays(3)); 
+	}
 
-  // runs every once everyday.
-//  @Scheduled(fixedRate = 86400000L) // 1 day in milliseconds
   @Override
   public void run() { 
 	  List<Vessel> vessels = serviceVessel.getAllVesselsNonResponseEntity();
 	  
-	  for (Vessel vessel: vessels) {
+	  for (Vessel vessel: vessels) {	
+		  
+		  if (!dueArriveInThreeDays(vessel.getBthgDt())) {
+			  continue;
+		  }
 		  
 		  try {
 			  Thread.sleep(1000);
 		  } catch (InterruptedException ie) {
 	    	  System.out.println("Thread Interrupted.");
 	      } 
+		  
+		  
 		  String fullVsIM = vessel.getFullVslM();
 		  String inVoyN  = vessel.getInVoyN();
 		  fullVsIM = fullVsIM.replaceAll("\\s+","");
@@ -145,12 +161,10 @@ public class ScheduleCurrentDay implements Runnable{
 				} else {
 					ObjectMapper mapper = new ObjectMapper();
 					Map<Object, Object> map = mapper.readValue(response.toString(), Map.class);
-					serviceVessel.updateVesselPartial(vessel.getFullVslM(), vessel.getInVoyN(), map);
+					serviceVessel.updateVesselPartial(vessel, map);
 					System.out.println("PRINT:" + map);
 				}
 	          }
-	          
-//	          Thread.sleep(1000);
 	      } catch (MalformedURLException ex) {
 	          System.out.println("Invalid URL");
 	      } catch (Exception e) {
@@ -169,6 +183,6 @@ public class ScheduleCurrentDay implements Runnable{
   
   @PostConstruct
   public void initializeScheduler() {
-//	  this.reSchedule(getCurrentDayRate(1));
+	  this.reSchedule(getCurrentDayRate(1));
   }
 }

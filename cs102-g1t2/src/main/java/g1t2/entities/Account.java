@@ -1,5 +1,7 @@
 package g1t2.entities;
 
+import java.util.Base64;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -41,6 +43,17 @@ public class Account {
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+	
+	public Account hashingPassword(){
+        String hashedPassword = Base64.getEncoder().encodeToString(this.getPassword().getBytes());
+        Account account = new Account(this.email, hashedPassword, this.dateOfBirth);
+        return account;
+    }
+//	
+//	public String getHashedPassword() {
+//		String hashedPassword = Base64.getEncoder().encodeToString(this.getPassword().getBytes());
+//        return hashedPassword;
+//	}
 	
 	
 }

@@ -1,8 +1,15 @@
 package g1t2.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +43,17 @@ public class Vessel {
 	private String VESSEL_NAME;
 	private String VOYAGE_CODE_INBOUND;
 	private String VSL_VOY;
+	
+////	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, ma)
+//	@OneToMany(mappedBy = "vessel")
+////	@JoinColumns({
+////		@JoinColumn(name = "vas_inVoyN", referencedColumnName = "inVoyN"),
+////		@JoinColumn(name = "vas_fullVslM", referencedColumnName = "fullVslM")
+////	})
+//	private List<AverageSpeed> averageSpeeds;
+	
+//	@OneToMany(mappedBy = "vessel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	
 	
 	
 	

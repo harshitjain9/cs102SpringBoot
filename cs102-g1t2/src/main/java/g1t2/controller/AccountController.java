@@ -1,6 +1,12 @@
 package g1t2.controller;
 
+import java.lang.reflect.Field;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +54,7 @@ public class AccountController {
 	@PostMapping("/accounts/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 		try {
-		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword()));
+		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getHashedPassword()));
 		} catch (BadCredentialsException e) {
 			throw new Exception("Incorrect email or password", e);
 		}
@@ -89,4 +95,6 @@ public class AccountController {
 	public ResponseEntity<Void> deleteAccount(@PathVariable String email) {
 		return accountService.deleteAccount(email);
 	}
+
+	
 }
