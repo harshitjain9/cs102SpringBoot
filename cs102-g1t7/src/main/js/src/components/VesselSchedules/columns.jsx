@@ -1,33 +1,32 @@
 import { SelectColumnFilter } from "./SelectColumnFilter.jsx";
 
-// abbrVslM: "ABHIMATA 1"
+// abbrVslM: "A EXPLORER"
 // avg_SPEED: null
-// berthN: "K09"
-// bthgDt: "2021-03-29T08:30:00"
-// count: 1
-// displayColor: "red"
+// berthN: "S03"
+// bthgDt: "2021-04-10T08:45:00"
+// count: 0
+// displayColor: null
 // distance_TO_GO: null
-// firstBthgDt: "2021-03-29T10:00:00"
-// fullInVoyN: "B125A"
-// fullVslM: "ABHIMATA 1"
-// inVoyN: "B125A"
+// firstBthgDt: null
+// fullInVoyN: "AE080421"
+// fullVslM: "ASEAN EXPLORER"
+// inVoyN: "TEST"
 // is_PATCHING_ACTIVATED: null
 // max_SPEED: null
-// outVoyN: "B125A"
+// outVoyN: "080421"
 // patching_PREDICTED_BTR: null
 // predicted_BTR: null
-// shiftSeqN: null
-// status: "UNBERTHED"
-// unbthgDt: "2021-03-29T11:00:00"
+// shiftSeqN: "1"
+// status: "ALONGSIDE"
+// unbthgDt: "2021-04-12T12:00:00"
 // vessel_NAME: null
 // voyage_CODE_INBOUND: null
 // vsl_VOY: null
-// __proto__: Object
 export const COLUMNS = [
 
     {
         Header: "Vessel's Name",
-        accessor: "vessel_NAME ",
+        accessor: "fullVslM",
         Cell: ({ value }) => {
             if (value == null) {
                 return "N/A";

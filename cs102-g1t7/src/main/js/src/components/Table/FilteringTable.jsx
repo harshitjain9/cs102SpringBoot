@@ -2,6 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useTable, useSortBy, useGlobalFilter, useFilters, usePagination } from "react-table";
 import { ColumnFilter } from "./ColumnFilter.jsx";
 import { GlobalFilter } from "./GlobalFilter.jsx";
+import { Button, ButtonGroup } from "react-bootstrap";
 import { NoFilter } from "./NoFilter.jsx"
 import { useHistory } from 'react-router-dom';
 import "./FilteringTable.css";
@@ -11,7 +12,7 @@ function FilteringTable({ columns, data, mockdata, placeholder, title, url, filt
 
     const history = useHistory();
     function handleRowClick(row) {
-        if (url=="alertsTriggered") {
+        if (url == "alertsTriggered") {
             return;
         }
         if (row.original.fullVslM != null || row.original.fullVslM != "") {
@@ -34,6 +35,28 @@ function FilteringTable({ columns, data, mockdata, placeholder, title, url, filt
         []
     );
 
+    function getDate(i) {
+        var today = new Date();
+        var dateObject = new Date(today.getTime() + i * (24 * 60 * 60 * 1000));
+        var d = dateObject.getDate();
+        var m = dateObject.getMonth() + 1;
+        var y = dateObject.getFullYear();
+        var dateString = y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+        return dateString;
+    }
+
+    function handleDateClick(date) {
+        setFValue(date)
+    }
+
+    function getButtons() {
+        let contents = [];
+        for (let i = 0; i < 7; i++) {
+            contents.push(<Button variant="info" className="mr-2 mt-2" onClick={() => handleDateClick(getDate(i))}>{getDate(i)}</Button>);
+        }
+        return contents;
+    }
+
     const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, gotoPage, pageCount, setPageSize, prepareRow, state, setGlobalFilter, setFilter } = useTable({
         columns, data, defaultColumn, initialState: { pageIndex: 0 }, filterTypes
     }, useFilters, useGlobalFilter, useSortBy, usePagination);
@@ -51,6 +74,11 @@ function FilteringTable({ columns, data, mockdata, placeholder, title, url, filt
                 <h1 className="table-page-heading">{title}</h1>
                 <GlobalFilter filter={fValue} setFilter={setFValue} placeholder={placeholder} />
             </div>
+            {title == "Vessel Schedule" ? <ButtonGroup aria-label="Basic example">
+                {
+                    getButtons()
+                }
+            </ButtonGroup> : null}
 
             <table {...getTableProps()}>
                 <thead>

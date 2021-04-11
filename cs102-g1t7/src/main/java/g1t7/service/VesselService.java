@@ -108,6 +108,14 @@ public class VesselService {
 		return updatedVessel;
 		
 	}
+
+	public void updateAverageSpeed(Vessel givenVessel) {
+		givenVessel.setThirdLastAvgSpeed(givenVessel.getSecondLastAvgSpeed());
+		givenVessel.setSecondLastAvgSpeed(givenVessel.getCurrentAvgSpeed());
+		givenVessel.setCurrentAvgSpeed(givenVessel.getAVG_SPEED());
+		vesselRepository.save(givenVessel);
+		return;
+	}
  
 	public ResponseEntity<Void> deleteVessel(String fullVslM, String inVoyN, String outVoyN) {
 		HttpStatus vesselExists = findByFullVslMAndInVoyN(fullVslM, inVoyN).getStatusCode();

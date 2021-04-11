@@ -63,7 +63,7 @@ public class ScheduleDaily implements Runnable{
     private WebServiceRepository repository;
 
     @Autowired
-    private SenseChangeInTime timeDetectionService;
+    private SenseChangeInFields timeDetectionService;
     
     private List<String> getDifference(Object s1, Object s2) throws IllegalAccessException {
         List<String> values = new ArrayList<>();
@@ -176,6 +176,5 @@ public class ScheduleDaily implements Runnable{
   @PostConstruct
   public void initializeScheduler() {
       this.reSchedule(getDailyFixedRate(1));
-//	  this.reSchedule("* * * ? * *");
   }
 }

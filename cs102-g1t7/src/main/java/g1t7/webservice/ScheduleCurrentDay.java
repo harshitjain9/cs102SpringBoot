@@ -69,7 +69,7 @@ public class ScheduleCurrentDay implements Runnable{
     private WebServiceRepository repository;
 
     @Autowired
-    private SenseChangeInTime timeDetectionService;
+    private SenseChangeInFields timeDetectionService;
     
     public int getCurrentDayRate(int id){
         WebService webservice = service.getWebserviceByIdNonResponseEntity(id);
@@ -161,7 +161,8 @@ public class ScheduleCurrentDay implements Runnable{
 				} else {
 					ObjectMapper mapper = new ObjectMapper();
 					Map<Object, Object> map = mapper.readValue(response.toString(), Map.class);
-					serviceVessel.updateVesselPartial(vessel, map);
+					Vessel updatedVessel = serviceVessel.updateVesselPartial(vessel, map);
+					serviceVessel.updateAverageSpeed(updatedVessel);
 					System.out.println("PRINT:" + map);
 				}
 	          }
