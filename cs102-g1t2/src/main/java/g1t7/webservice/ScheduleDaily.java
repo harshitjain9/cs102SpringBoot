@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 //import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledFuture;
@@ -28,6 +29,7 @@ import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import g1t7.entities.Vessel;
@@ -88,10 +90,6 @@ public class ScheduleDaily implements Runnable{
         return webservice.getApiKey();
     }
 
-    public void replaceDataForDaily(List<Vessel> vesselList){
-        serviceVessel.addVesselsList(vesselList);
-    }
-
     public void reSchedule(String cronExpressionStr){
         if(taskScheduler== null){
             this.taskScheduler = new ConcurrentTaskScheduler();
@@ -146,30 +144,22 @@ public class ScheduleDaily implements Runnable{
             for (int i = 0, size = jsonArray.length(); i < size; i++){
                 JSONObject objectInArray = jsonArray.getJSONObject(i);
                 Vessel newVessel= gson.fromJson(objectInArray.toString(), Vessel.class);
-                Vessel existingVessel = timeDetectionService.getExistingVessel(newVessel);
-                
-                //flow:
+                Vessel existingVessel = serviceVessel.findByFullVslMAndInVoyNNNonResponseEntity(newVessel.getFullVslM(), newVessel.getInVoyN());
+              //flow:
                 //check if there is a difference in the new vessel and the old vessel
-                //if yes, update all the users who have subscribed to the vessel and update the vessel as well, save alert trigerred data in database
-                //if no, just continue.
+                //if yes, update all the users who have subscribed to the vessel,save alert trigerred data in database and update the vessel as well
                 //previous average speed:
                 //update the latest avgSpeeds.
-                
-                List<String> diffFields = getDifference(existingVessel, newVessel);
-                if (diffFields.size() != 0) {
-                	timeDetectionService.emailRegardingChangeInVessel(existingVessel,diffFields);
-                } else {
-                	
+                if (existingVessel != null) {
+	                List<String> diffFields = getDifference(existingVessel, newVessel);
+	                if (diffFields.size() != 0) {
+	                	timeDetectionService.emailRegardingChangeInVessel(existingVessel,diffFields);
+	                } 
                 }
-               vesselList.add(newVessel);
-                
-//                timeDetectionService.operationsUponBerthTimeChange(newVessel,existingVessel, vesselList);
-//                timeDetectionService.toEmailIfBerthOrDepartTimeChange(newVessel,existingVessel);
+                ObjectMapper mapper = new ObjectMapper();
+				Map<Object, Object> map = mapper.readValue(response.toString(), Map.class);
+				serviceVessel.updateVesselPartial(newVessel, map);
             }
-            System.out.println(vesselList);
-//            c++;
-//            System.out.println(c);
-            replaceDataForDaily(vesselList);
 
           }
       } catch (MalformedURLException ex) {
@@ -185,8 +175,7 @@ public class ScheduleDaily implements Runnable{
   
   @PostConstruct
   public void initializeScheduler() {
-//	  this.reSchedule(3);
-//      this.reSchedule(getDailyFixedRate(1));
+      this.reSchedule(getDailyFixedRate(1));
 //	  this.reSchedule("* * * ? * *");
   }
 }

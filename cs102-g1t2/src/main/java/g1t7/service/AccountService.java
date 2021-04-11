@@ -35,7 +35,7 @@ public class AccountService {
 		if (accountExists == HttpStatus.OK) {
 			return null;
 		}
-		Account savedAccount = accountRepository.save(account);
+		Account savedAccount = accountRepository.save(account.hashingPassword());
 		return savedAccount;
 	}
 	
@@ -44,8 +44,8 @@ public class AccountService {
 		if (accountExists == HttpStatus.NOT_FOUND) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
-		accountRepository.save(account);
-		return ResponseEntity.ok(account);
+		Account updatedAccount = accountRepository.save(account.hashingPassword());
+		return ResponseEntity.ok(updatedAccount);
 	}
 	
 	public ResponseEntity<Void> deleteAccount(String email) {
