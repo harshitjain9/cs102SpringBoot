@@ -21,7 +21,7 @@ This directory contains the deploy.sql script, and README.txt.
 3. Run run.bat .
 ## -------------------------------------------Login------------------------------------------
 4. Access the interface with `localhost:3000/login` .
-5. Use Test account to login: Username: test@test.com Password: test .
+5. Use Test account to login: Username: test@test.com Password: abc .
 6. In the homepage, you can sort by selecting the way you want to sort and press `confirm`.
 7. To add to Alerts, click the `add` button and it will be accessible via the `Alerts Configured` button.
 8. To check any realtime alerts that have been triggered, click on the `Alerts Triggered` button.
@@ -37,7 +37,7 @@ This directory contains the deploy.sql script, and README.txt.
 16. Click `Create Account`.
 17. Login and test.
 ## ------------------------------Change API and API call interval---------------------------
-18. Login with admin account: Username: admin@psa.com Password: admin
+18. Login with admin account: Username: admin@psa.com Password: abc
 19. You will see the webservice page. 
 	NOTE: You do not need to add all of the field, just what you need to change.
 20. Click submit and check.
