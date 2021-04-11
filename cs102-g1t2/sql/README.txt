@@ -1,4 +1,5 @@
-Instructions
+Instructions to run deploy.sql
+(Refer to README.md for overall instructions to run the application)
 ____________________________________________________
 
 1. Run WampServer if on Windows, and MampServer if on MacOS.
