@@ -2,9 +2,9 @@ import React, { useState, useMemo, useEffect } from "react";
 import FilteringTable from "../Table/FilteringTable.jsx";
 import { COLUMNS } from "./columns.jsx";
 import axios from "axios";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
-function AlertsConfigured({auth}) {
+function AlertsConfigured({ auth }) {
     const [vessels, setVessels] = useState([]);
 
     function modify(str) {
@@ -24,28 +24,29 @@ function AlertsConfigured({auth}) {
         fetchItems();
     }, [])
 
-    const fetchItems = async () => {  
-        console.log("in the function");   
-        setVessels([]);    
+    const fetchItems = async () => {
+        console.log("in the function");
+        setVessels([]);
         axios.get(`http://localhost:8080/getAlertsAccordingToUser/${auth.user.username}`, config)
-            .then(response =>  {
+            .then(response => {
                 return response.data;
             })
             .then(items => {
-                items.forEach((alert)=> {
+                items.forEach((alert) => {
                     var fullVslM = alert.fullVslM;
                     console.log(fullVslM);
                     var inVoyN = alert.inVoyN;
                     console.log(inVoyN);
                     axios.get(`http://localhost:8080/vessels/${fullVslM}/${inVoyN}`, config)
-                    .then(response => {
-                        return response.data})
-                    .then(item => {
-                        setVessels(vessels => [...vessels, item])
-                    });
-                console.log("VESSELS ", vessels);
-            })   
-        })     
+                        .then(response => {
+                            return response.data
+                        })
+                        .then(item => {
+                            setVessels(vessels => [...vessels, item])
+                        });
+                    console.log("VESSELS ", vessels);
+                })
+            })
     }
 
 
@@ -60,12 +61,12 @@ function AlertsConfigured({auth}) {
 
 const mapStateToProps = (state) => ({
     auth: state.auth
-  });
-  
-  const mapDispatchToProps = dispatch => {
+});
+
+const mapDispatchToProps = dispatch => {
     return {
-      
+
     };
-  };
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(AlertsConfigured);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AlertsConfigured);

@@ -11,7 +11,7 @@ function VesselSchedules() {
         fetchItems();
     }, [])
 
-    const fetchItems = async () => {  
+    const fetchItems = async () => {
         const config = {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem('jwt')}`
@@ -21,6 +21,7 @@ function VesselSchedules() {
         axios.get("http://localhost:8080/vessels", config)
             .then(response => response.data)
             .then(items => {
+                console.log(items);
                 setItems(items)
             })
         console.log(items);

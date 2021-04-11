@@ -26,7 +26,7 @@ function App() {
         <Route path="/webServicesSettings" component={WebServicesSettings} />
         <Route path="/forgotPassword" component={ForgotPassword} />
         <Route path="/createAccount" component={Registration} />
-        <Route path="/" exact component={VesselSchedules} />
+        <Route path="/" exact component={Login} />
       </Switch>
       <Footer />
     </Router>

@@ -38,7 +38,7 @@ const Login = ({ auth, login, error }) => {
       if (auth.user.username == "admin@psa.com") {
         history.push("/webServicesSettings");
       } else {
-        history.push("/");
+        history.push("/vesselSchedules");
       }
     }
   }, [auth]);

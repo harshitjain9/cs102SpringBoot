@@ -9,7 +9,6 @@ function Header({ auth, logoutUser }) {
     const history = useHistory();
     function logout() {
         logoutUser();
-        history.push("/login");
     }
 
     const authLinks = (

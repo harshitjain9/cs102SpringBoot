@@ -43,39 +43,23 @@ public class Vessel {
 	private String VESSEL_NAME;
 	private String VOYAGE_CODE_INBOUND;
 	private String VSL_VOY;
+	private String CURRENT_PORT_COUNTRY;
+	private String CURRENT_PORT;
+	private String LAST_PORT_COUNTRY;
+	private String LAST_PORT;
+	private String NEXT_PORT_COUNTRY;
+	private String NEXT_PORT_NAME;
+	private String currentAvgSpeed;
+	private String secondLastAvgSpeed;
+	private String thirdLastAvgSpeed;
 	
-////	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, ma)
-//	@OneToMany(mappedBy = "vessel")
-////	@JoinColumns({
-////		@JoinColumn(name = "vas_inVoyN", referencedColumnName = "inVoyN"),
-////		@JoinColumn(name = "vas_fullVslM", referencedColumnName = "fullVslM")
-////	})
-//	private List<AverageSpeed> averageSpeeds;
-	
-//	@OneToMany(mappedBy = "vessel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	
-	
-	
-	
-
 	// count refers to the number of times the timing has been updated
 	// used for SenseChangeInTime.java
-	private int count;
-    private String firstBthgDt;
-    private String displayColor;
-	
-	public Vessel() {
-		
-	}
 
-	public Vessel(String abbrVslM, String inVoyN, String fullVslM, String fullInVoyN, String outVoyN, String shiftSeqN,
-			String bthgDt, String unbthgDt, String berthN, String status, String aVG_SPEED, String dISTANCE_TO_GO,
-			String iS_PATCHING_ACTIVATED, String mAX_SPEED, String pATCHING_PREDICTED_BTR, String pREDICTED_BTR,
-			String vESSEL_NAME, String vOYAGE_CODE_INBOUND, String vSL_VOY) {
-		super();
-		this.abbrVslM = abbrVslM;
+	public Vessel(String inVoyN, String fullVslM, String abbrVslM, String fullInVoyN, String outVoyN, String shiftSeqN, String bthgDt, String unbthgDt, String berthN, String status, String AVG_SPEED, String DISTANCE_TO_GO, String IS_PATCHING_ACTIVATED, String MAX_SPEED, String PATCHING_PREDICTED_BTR, String PREDICTED_BTR, String VESSEL_NAME, String VOYAGE_CODE_INBOUND, String VSL_VOY, String CURRENT_PORT_COUNTRY, String CURRENT_PORT, String LAST_PORT_COUNTRY, String LAST_PORT, String NEXT_PORT_COUNTRY, String NEXT_PORT_NAME, String currentAvgSpeed, String secondLastAvgSpeed, String thirdLastAvgSpeed) {
 		this.inVoyN = inVoyN;
 		this.fullVslM = fullVslM;
+		this.abbrVslM = abbrVslM;
 		this.fullInVoyN = fullInVoyN;
 		this.outVoyN = outVoyN;
 		this.shiftSeqN = shiftSeqN;
@@ -83,15 +67,28 @@ public class Vessel {
 		this.unbthgDt = unbthgDt;
 		this.berthN = berthN;
 		this.status = status;
-		AVG_SPEED = aVG_SPEED;
-		DISTANCE_TO_GO = dISTANCE_TO_GO;
-		IS_PATCHING_ACTIVATED = iS_PATCHING_ACTIVATED;
-		MAX_SPEED = mAX_SPEED;
-		PATCHING_PREDICTED_BTR = pATCHING_PREDICTED_BTR;
-		PREDICTED_BTR = pREDICTED_BTR;
-		VESSEL_NAME = vESSEL_NAME;
-		VOYAGE_CODE_INBOUND = vOYAGE_CODE_INBOUND;
-		VSL_VOY = vSL_VOY;
+		this.AVG_SPEED = AVG_SPEED;
+		this.DISTANCE_TO_GO = DISTANCE_TO_GO;
+		this.IS_PATCHING_ACTIVATED = IS_PATCHING_ACTIVATED;
+		this.MAX_SPEED = MAX_SPEED;
+		this.PATCHING_PREDICTED_BTR = PATCHING_PREDICTED_BTR;
+		this.PREDICTED_BTR = PREDICTED_BTR;
+		this.VESSEL_NAME = VESSEL_NAME;
+		this.VOYAGE_CODE_INBOUND = VOYAGE_CODE_INBOUND;
+		this.VSL_VOY = VSL_VOY;
+		this.CURRENT_PORT_COUNTRY = CURRENT_PORT_COUNTRY;
+		this.CURRENT_PORT = CURRENT_PORT;
+		this.LAST_PORT_COUNTRY = LAST_PORT_COUNTRY;
+		this.LAST_PORT = LAST_PORT;
+		this.NEXT_PORT_COUNTRY = NEXT_PORT_COUNTRY;
+		this.NEXT_PORT_NAME = NEXT_PORT_NAME;
+		this.currentAvgSpeed = currentAvgSpeed;
+		this.secondLastAvgSpeed = secondLastAvgSpeed;
+		this.thirdLastAvgSpeed = thirdLastAvgSpeed;
+	}
+	
+	public Vessel() {
+		
 	}
 	
 	public String getFullVslM() {
@@ -208,34 +205,77 @@ public class Vessel {
 	public void setVSL_VOY(String vSL_VOY) {
 		VSL_VOY = vSL_VOY;
 	}
-	
-	// below getters and setters are for SenseChangeInTime.java
-	
-	public int getCount() {
-		return count;
-	}
-	public String getFirstBthgDt() {
-		return firstBthgDt;
-	}
-	public void setCount(int count) {
-        this.count = count;
-    }
 
-    public void setFirstBthgDt(String firstBthgDt) {
-        this.firstBthgDt = firstBthgDt;
-    }
-    
-    public void incrementCount() {
-        this.count++;
-    }
-    
-    public String getDisplayColor() {
-		return displayColor;
+	public String getCURRENT_PORT_COUNTRY() {
+		return this.CURRENT_PORT_COUNTRY;
 	}
-    
-	public void setDisplayColor(String displayColor) {
-		this.displayColor = displayColor;
+
+	public void setCURRENT_PORT_COUNTRY(String CURRENT_PORT_COUNTRY) {
+		this.CURRENT_PORT_COUNTRY = CURRENT_PORT_COUNTRY;
 	}
-	
-	
+
+	public String getCURRENT_PORT() {
+		return this.CURRENT_PORT;
+	}
+
+	public void setCURRENT_PORT(String CURRENT_PORT) {
+		this.CURRENT_PORT = CURRENT_PORT;
+	}
+
+	public String getLAST_PORT_COUNTRY() {
+		return this.LAST_PORT_COUNTRY;
+	}
+
+	public void setLAST_PORT_COUNTRY(String LAST_PORT_COUNTRY) {
+		this.LAST_PORT_COUNTRY = LAST_PORT_COUNTRY;
+	}
+
+	public String getLAST_PORT() {
+		return this.LAST_PORT;
+	}
+
+	public void setLAST_PORT(String LAST_PORT) {
+		this.LAST_PORT = LAST_PORT;
+	}
+
+	public String getNEXT_PORT_COUNTRY() {
+		return this.NEXT_PORT_COUNTRY;
+	}
+
+	public void setNEXT_PORT_COUNTRY(String NEXT_PORT_COUNTRY) {
+		this.NEXT_PORT_COUNTRY = NEXT_PORT_COUNTRY;
+	}
+
+	public String getNEXT_PORT_NAME() {
+		return this.NEXT_PORT_NAME;
+	}
+
+	public void setNEXT_PORT_NAME(String NEXT_PORT_NAME) {
+		this.NEXT_PORT_NAME = NEXT_PORT_NAME;
+	}
+
+	public String getCurrentAvgSpeed() {
+		return this.currentAvgSpeed;
+	}
+
+	public void setCurrentAvgSpeed(String currentAvgSpeed) {
+		this.currentAvgSpeed = currentAvgSpeed;
+	}
+
+	public String getSecondLastAvgSpeed() {
+		return this.secondLastAvgSpeed;
+	}
+
+	public void setSecondLastAvgSpeed(String secondLastAvgSpeed) {
+		this.secondLastAvgSpeed = secondLastAvgSpeed;
+	}
+
+	public String getThirdLastAvgSpeed() {
+		return this.thirdLastAvgSpeed;
+	}
+
+	public void setThirdLastAvgSpeed(String thirdLastAvgSpeed) {
+		this.thirdLastAvgSpeed = thirdLastAvgSpeed;
+	}
+
 }
