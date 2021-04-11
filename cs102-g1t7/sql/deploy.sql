@@ -89,5 +89,5 @@ CREATE TABLE IF NOT EXISTS `WebService_table` (
 
 
 insert into webservice_table values
-(1, 'OGY3NjVlM2JmODUzNDI0M2JjZWViNTM0MWE3OGY1ZjI=', '* 0 0 * * *', 43200000, 'https://api.portnet.com/vsspp/pp/bizfn/berthingSchedule/retrieveByBerthingDate/v1.2', 'https://api.portnet.com/extapi/vessels/predictedbtr');
+(1, 'OGY3NjVlM2JmODUzNDI0M2JjZWViNTM0MWE3OGY1ZjI=', '0 0 12 * * *', 43200000, 'https://api.portnet.com/vsspp/pp/bizfn/berthingSchedule/retrieveByBerthingDate/v1.2', 'https://api.portnet.com/extapi/vessels/predictedbtr');
 
