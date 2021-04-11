@@ -23,7 +23,7 @@ This directory contains the deploy.sql script, and README.txt.
 4. Access the interface with `localhost:3000/login` .
 5. Use Test account to login: Username: test@test.com Password: abc .
 6. In the homepage, you can sort by selecting the way you want to sort and press `confirm`.
-7. You can view more details of the vessel by clicking onto it.
+7. You can view more details of the vessel, for example - distance to go,  by clicking onto it.
 8. To add to Alerts, click the `Add Alert` button and it will be accessible via the `Alerts Configured` button.
 9. There will also be a `Delete Alert` button where you can click on it if you no longer need to be informed about the changes in schedule of the vessel.
 10. To check if any realtime alerts that have been triggered, click on the `Alerts Triggered` button.
