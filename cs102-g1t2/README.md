@@ -23,9 +23,10 @@ This directory contains the deploy.sql script, and README.txt.
 4. Access the interface with `localhost:3000/login` .
 5. Use Test account to login: Username: test@test.com Password: abc .
 6. In the homepage, you can sort by selecting the way you want to sort and press `confirm`.
-7. To add to Alerts, click the `add` button and it will be accessible via the `Alerts Configured` button.
+7. To add to Alerts, click the `Add Alert` button and it will be accessible via the `Alerts Configured` button.
 8. To check any realtime alerts that have been triggered, click on the `Alerts Triggered` button.
-9. Click logout and it will lead you to login page.
+9. Click on the buttons with dates on them i.e. `2021-04-11` to view the Vessel schedule according to the date selected.
+10. Click logout and it will lead you to login page.
 ## ----------------------------------Forget & Reset password--------------------------------
 10. Click forget password at login page.
 11. Use Test account to do so: Username: test@test.com DoB: 01/02/2000 .
